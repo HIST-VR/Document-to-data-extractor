@@ -1,0 +1,137 @@
+{
+  "id": "waybill-russian",
+  "mimeType": "application/pdf",
+  "file": "waybill-russian.pdf",
+  "planted": [],
+  "extraction": {
+    "documentType": "waybill",
+    "documentNumber": {
+      "value": "РН-44",
+      "evidence": "№ РН-44",
+      "page": 1
+    },
+    "issueDate": {
+      "value": "2026-02-19",
+      "evidence": "19.02.2026",
+      "page": 1
+    },
+    "currency": {
+      "value": "UAH",
+      "evidence": "UAH",
+      "page": 1
+    },
+    "seller": {
+      "name": {
+        "value": "ООО «Тихий Берег»",
+        "evidence": "ООО «Тихий Берег»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "62345028",
+        "evidence": "62345028",
+        "page": 1
+      },
+      "ipn": {
+        "value": "3344556671",
+        "evidence": "3344556671",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA593365030000000260055555555",
+        "evidence": "UA593365030000000260055555555",
+        "page": 1
+      },
+      "address": {
+        "value": "ул. Набережная, 3, г. Харьков, 61000",
+        "evidence": "ул. Набережная, 3, г. Харьков, 61000",
+        "page": 1
+      }
+    },
+    "buyer": {
+      "name": {
+        "value": "ТОВ «Польова Межа»",
+        "evidence": "ТОВ «Польова Межа»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "19088019",
+        "evidence": "19088019",
+        "page": 1
+      },
+      "ipn": {
+        "value": "2765432103",
+        "evidence": "2765432103",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA963000120000000260044444444",
+        "evidence": "UA963000120000000260044444444",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Польова, 7, м. Вінниця, 21001",
+        "evidence": "вул. Польова, 7, м. Вінниця, 21001",
+        "page": 1
+      }
+    },
+    "lineItems": [
+      {
+        "description": {
+          "value": "Краска фасадная",
+          "evidence": "Краска фасадная",
+          "page": 1
+        },
+        "unit": {
+          "value": "л",
+          "evidence": "Ед. л",
+          "page": 1
+        },
+        "quantity": {
+          "value": 3,
+          "evidence": "Кол-во 3",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 100,
+          "evidence": "Цена 100,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0.2,
+          "evidence": "НДС 20%",
+          "page": 1
+        },
+        "amount": {
+          "value": 300,
+          "evidence": "Сумма 300,00",
+          "page": 1
+        }
+      }
+    ],
+    "subtotal": {
+      "value": 300,
+      "evidence": "Итого без НДС: 300,00",
+      "page": 1
+    },
+    "vatTotal": {
+      "value": 60,
+      "evidence": "НДС: 60,00",
+      "page": 1
+    },
+    "total": {
+      "value": 360,
+      "evidence": "Всего: 360,00",
+      "page": 1
+    },
+    "totalInWords": {
+      "value": "Триста шестьдесят гривень 00 копеек",
+      "evidence": "Триста шестьдесят гривень 00 копеек",
+      "page": 1
+    },
+    "paymentPurpose": {
+      "value": "Оплата краски",
+      "evidence": "Оплата краски",
+      "page": 1
+    }
+  }
+}

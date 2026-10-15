@@ -1,0 +1,137 @@
+{
+  "id": "invoice-narrow",
+  "mimeType": "application/pdf",
+  "file": "invoice-narrow.pdf",
+  "planted": [],
+  "extraction": {
+    "documentType": "invoice",
+    "documentNumber": {
+      "value": "КЛ-2202",
+      "evidence": "№ КЛ-2202",
+      "page": 1
+    },
+    "issueDate": {
+      "value": "2026-02-02",
+      "evidence": "02.02.2026",
+      "page": 1
+    },
+    "currency": {
+      "value": "UAH",
+      "evidence": "UAH",
+      "page": 1
+    },
+    "seller": {
+      "name": {
+        "value": "ТОВ «Польова Межа»",
+        "evidence": "ТОВ «Польова Межа»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "19088019",
+        "evidence": "19088019",
+        "page": 1
+      },
+      "ipn": {
+        "value": "2765432103",
+        "evidence": "2765432103",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA963000120000000260044444444",
+        "evidence": "UA963000120000000260044444444",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Польова, 7, м. Вінниця, 21001",
+        "evidence": "вул. Польова, 7, м. Вінниця, 21001",
+        "page": 1
+      }
+    },
+    "buyer": {
+      "name": {
+        "value": "ТОВ «Кленова Тінь»",
+        "evidence": "ТОВ «Кленова Тінь»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "21543006",
+        "evidence": "21543006",
+        "page": 1
+      },
+      "ipn": {
+        "value": "2456789015",
+        "evidence": "2456789015",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA533052990000000260011111111",
+        "evidence": "UA533052990000000260011111111",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Кленова, 4, м. Львів, 79008",
+        "evidence": "вул. Кленова, 4, м. Львів, 79008",
+        "page": 1
+      }
+    },
+    "lineItems": [
+      {
+        "description": {
+          "value": "Нічний аудит",
+          "evidence": "Нічний аудит",
+          "page": 1
+        },
+        "unit": {
+          "value": "послуга",
+          "evidence": "Од. послуга",
+          "page": 1
+        },
+        "quantity": {
+          "value": 4,
+          "evidence": "Кількість 4",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 150,
+          "evidence": "Ціна 150,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0.2,
+          "evidence": "ПДВ 20%",
+          "page": 1
+        },
+        "amount": {
+          "value": 600,
+          "evidence": "Сума 600,00",
+          "page": 1
+        }
+      }
+    ],
+    "subtotal": {
+      "value": 600,
+      "evidence": "Разом без ПДВ: 600,00",
+      "page": 1
+    },
+    "vatTotal": {
+      "value": 120,
+      "evidence": "ПДВ: 120,00",
+      "page": 1
+    },
+    "total": {
+      "value": 720,
+      "evidence": "Всього: 720,00",
+      "page": 1
+    },
+    "totalInWords": {
+      "value": "Сімсот двадцять гривень 00 копійок",
+      "evidence": "Сімсот двадцять гривень 00 копійок",
+      "page": 1
+    },
+    "paymentPurpose": {
+      "value": "Оплата аудиту",
+      "evidence": "Оплата аудиту",
+      "page": 1
+    }
+  }
+}

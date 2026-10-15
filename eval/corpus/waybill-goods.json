@@ -1,0 +1,201 @@
+{
+  "id": "waybill-goods",
+  "mimeType": "application/pdf",
+  "file": "waybill-goods.pdf",
+  "planted": [],
+  "extraction": {
+    "documentType": "waybill",
+    "documentNumber": {
+      "value": "ВН-880",
+      "evidence": "№ ВН-880",
+      "page": 1
+    },
+    "issueDate": {
+      "value": "2026-01-28",
+      "evidence": "28.01.2026",
+      "page": 1
+    },
+    "currency": {
+      "value": "UAH",
+      "evidence": "UAH",
+      "page": 1
+    },
+    "seller": {
+      "name": {
+        "value": "ТОВ «Польова Межа»",
+        "evidence": "ТОВ «Польова Межа»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "19088019",
+        "evidence": "19088019",
+        "page": 1
+      },
+      "ipn": {
+        "value": "2765432103",
+        "evidence": "2765432103",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA963000120000000260044444444",
+        "evidence": "UA963000120000000260044444444",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Польова, 7, м. Вінниця, 21001",
+        "evidence": "вул. Польова, 7, м. Вінниця, 21001",
+        "page": 1
+      }
+    },
+    "buyer": {
+      "name": {
+        "value": "ТОВ «Кленова Тінь»",
+        "evidence": "ТОВ «Кленова Тінь»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "21543006",
+        "evidence": "21543006",
+        "page": 1
+      },
+      "ipn": {
+        "value": "2456789015",
+        "evidence": "2456789015",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA533052990000000260011111111",
+        "evidence": "UA533052990000000260011111111",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Кленова, 4, м. Львів, 79008",
+        "evidence": "вул. Кленова, 4, м. Львів, 79008",
+        "page": 1
+      }
+    },
+    "lineItems": [
+      {
+        "description": {
+          "value": "Папір А4",
+          "evidence": "Папір А4",
+          "page": 1
+        },
+        "unit": {
+          "value": "пачка",
+          "evidence": "Од. пачка",
+          "page": 1
+        },
+        "quantity": {
+          "value": 1,
+          "evidence": "Кількість 1",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 80,
+          "evidence": "Ціна 80,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0,
+          "evidence": "ПДВ 0%",
+          "page": 1
+        },
+        "amount": {
+          "value": 80,
+          "evidence": "Сума 80,00",
+          "page": 1
+        }
+      },
+      {
+        "description": {
+          "value": "Стрічка",
+          "evidence": "Стрічка",
+          "page": 1
+        },
+        "unit": {
+          "value": "шт",
+          "evidence": "Од. шт",
+          "page": 1
+        },
+        "quantity": {
+          "value": 2,
+          "evidence": "Кількість 2",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 40,
+          "evidence": "Ціна 40,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0,
+          "evidence": "ПДВ 0%",
+          "page": 1
+        },
+        "amount": {
+          "value": 80,
+          "evidence": "Сума 80,00",
+          "page": 1
+        }
+      },
+      {
+        "description": {
+          "value": "Цвяхи",
+          "evidence": "Цвяхи",
+          "page": 1
+        },
+        "unit": {
+          "value": "кг",
+          "evidence": "Од. кг",
+          "page": 1
+        },
+        "quantity": {
+          "value": 1,
+          "evidence": "Кількість 1",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 40,
+          "evidence": "Ціна 40,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0,
+          "evidence": "ПДВ 0%",
+          "page": 1
+        },
+        "amount": {
+          "value": 40,
+          "evidence": "Сума 40,00",
+          "page": 1
+        }
+      }
+    ],
+    "subtotal": {
+      "value": 200,
+      "evidence": "Разом без ПДВ: 200,00",
+      "page": 1
+    },
+    "vatTotal": {
+      "value": 0,
+      "evidence": "ПДВ: 0,00",
+      "page": 1
+    },
+    "total": {
+      "value": 200,
+      "evidence": "Всього: 200,00",
+      "page": 1
+    },
+    "totalInWords": {
+      "value": "Двісті гривень 00 копійок",
+      "evidence": "Двісті гривень 00 копійок",
+      "page": 1
+    },
+    "paymentPurpose": {
+      "value": "Оплата матеріалів",
+      "evidence": "Оплата матеріалів",
+      "page": 1
+    }
+  }
+}

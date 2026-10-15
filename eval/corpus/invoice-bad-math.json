@@ -1,0 +1,142 @@
+{
+  "id": "invoice-bad-math",
+  "mimeType": "application/pdf",
+  "file": "invoice-bad-math.pdf",
+  "planted": [
+    {
+      "path": "lineItems[0].amount",
+      "code": "arithmetic-off"
+    }
+  ],
+  "extraction": {
+    "documentType": "invoice",
+    "documentNumber": {
+      "value": "КЛ-2212",
+      "evidence": "№ КЛ-2212",
+      "page": 1
+    },
+    "issueDate": {
+      "value": "2026-03-11",
+      "evidence": "11.03.2026",
+      "page": 1
+    },
+    "currency": {
+      "value": "UAH",
+      "evidence": "UAH",
+      "page": 1
+    },
+    "seller": {
+      "name": {
+        "value": "ТОВ «Польова Межа»",
+        "evidence": "ТОВ «Польова Межа»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "19088019",
+        "evidence": "19088019",
+        "page": 1
+      },
+      "ipn": {
+        "value": "2765432103",
+        "evidence": "2765432103",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA963000120000000260044444444",
+        "evidence": "UA963000120000000260044444444",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Польова, 7, м. Вінниця, 21001",
+        "evidence": "вул. Польова, 7, м. Вінниця, 21001",
+        "page": 1
+      }
+    },
+    "buyer": {
+      "name": {
+        "value": "ТОВ «Сірий Берег»",
+        "evidence": "ТОВ «Сірий Берег»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "55012033",
+        "evidence": "55012033",
+        "page": 1
+      },
+      "ipn": {
+        "value": "3019283743",
+        "evidence": "3019283743",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA873220010000000260022222222",
+        "evidence": "UA873220010000000260022222222",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Портова, 18, м. Одеса, 65026",
+        "evidence": "вул. Портова, 18, м. Одеса, 65026",
+        "page": 1
+      }
+    },
+    "lineItems": [
+      {
+        "description": {
+          "value": "Ремонт сейфа",
+          "evidence": "Ремонт сейфа",
+          "page": 1
+        },
+        "unit": {
+          "value": "год",
+          "evidence": "Од. год",
+          "page": 1
+        },
+        "quantity": {
+          "value": 3,
+          "evidence": "Кількість 3",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 100,
+          "evidence": "Ціна 100,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0.2,
+          "evidence": "ПДВ 20%",
+          "page": 1
+        },
+        "amount": {
+          "value": 250,
+          "evidence": "Сума 250,00",
+          "page": 1
+        }
+      }
+    ],
+    "subtotal": {
+      "value": 250,
+      "evidence": "Разом без ПДВ: 250,00",
+      "page": 1
+    },
+    "vatTotal": {
+      "value": 50,
+      "evidence": "ПДВ: 50,00",
+      "page": 1
+    },
+    "total": {
+      "value": 300,
+      "evidence": "Всього: 300,00",
+      "page": 1
+    },
+    "totalInWords": {
+      "value": "Триста гривень 00 копійок",
+      "evidence": "Триста гривень 00 копійок",
+      "page": 1
+    },
+    "paymentPurpose": {
+      "value": "Оплата ремонту",
+      "evidence": "Оплата ремонту",
+      "page": 1
+    }
+  }
+}

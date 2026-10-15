@@ -1,0 +1,137 @@
+{
+  "id": "act-no-iban",
+  "mimeType": "application/pdf",
+  "file": "act-no-iban.pdf",
+  "planted": [],
+  "extraction": {
+    "documentType": "act",
+    "documentNumber": {
+      "value": "АВ-311",
+      "evidence": "№ АВ-311",
+      "page": 1
+    },
+    "issueDate": {
+      "value": "2026-03-01",
+      "evidence": "01.03.2026",
+      "page": 1
+    },
+    "currency": {
+      "value": "UAH",
+      "evidence": "UAH",
+      "page": 1
+    },
+    "seller": {
+      "name": {
+        "value": "ФОП Марина Коваль",
+        "evidence": "ФОП Марина Коваль",
+        "page": 1
+      },
+      "edrpou": {
+        "value": null,
+        "evidence": null,
+        "page": null
+      },
+      "ipn": {
+        "value": "1982736454",
+        "evidence": "1982736454",
+        "page": 1
+      },
+      "iban": {
+        "value": null,
+        "evidence": null,
+        "page": null
+      },
+      "address": {
+        "value": "вул. Шевченка, 9, м. Чернівці, 58002",
+        "evidence": "вул. Шевченка, 9, м. Чернівці, 58002",
+        "page": 1
+      }
+    },
+    "buyer": {
+      "name": {
+        "value": "ТОВ «Сірий Берег»",
+        "evidence": "ТОВ «Сірий Берег»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "55012033",
+        "evidence": "55012033",
+        "page": 1
+      },
+      "ipn": {
+        "value": "3019283743",
+        "evidence": "3019283743",
+        "page": 1
+      },
+      "iban": {
+        "value": null,
+        "evidence": null,
+        "page": null
+      },
+      "address": {
+        "value": "вул. Портова, 18, м. Одеса, 65026",
+        "evidence": "вул. Портова, 18, м. Одеса, 65026",
+        "page": 1
+      }
+    },
+    "lineItems": [
+      {
+        "description": {
+          "value": "Підготовка звіту",
+          "evidence": "Підготовка звіту",
+          "page": 1
+        },
+        "unit": {
+          "value": "послуга",
+          "evidence": "Од. послуга",
+          "page": 1
+        },
+        "quantity": {
+          "value": 2,
+          "evidence": "Кількість 2",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 200,
+          "evidence": "Ціна 200,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0.2,
+          "evidence": "ПДВ 20%",
+          "page": 1
+        },
+        "amount": {
+          "value": 400,
+          "evidence": "Сума 400,00",
+          "page": 1
+        }
+      }
+    ],
+    "subtotal": {
+      "value": 400,
+      "evidence": "Разом без ПДВ: 400,00",
+      "page": 1
+    },
+    "vatTotal": {
+      "value": 80,
+      "evidence": "ПДВ: 80,00",
+      "page": 1
+    },
+    "total": {
+      "value": 480,
+      "evidence": "Всього: 480,00",
+      "page": 1
+    },
+    "totalInWords": {
+      "value": "Чотириста вісімдесят гривень 00 копійок",
+      "evidence": "Чотириста вісімдесят гривень 00 копійок",
+      "page": 1
+    },
+    "paymentPurpose": {
+      "value": "Оплата звіту",
+      "evidence": "Оплата звіту",
+      "page": 1
+    }
+  }
+}

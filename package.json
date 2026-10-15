@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit && tsc --noEmit -p functions/tsconfig.json",
     "lint": "eslint .",
     "test": "vitest run --coverage",
+    "eval": "node --experimental-strip-types --import ./scripts/eval/register.mjs scripts/eval/run.mjs",
     "deploy": "npm run build && wrangler pages deploy dist"
   },
   "dependencies": {

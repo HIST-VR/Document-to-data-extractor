@@ -1,0 +1,137 @@
+{
+  "id": "invoice-twopage",
+  "mimeType": "application/pdf",
+  "file": "invoice-twopage.pdf",
+  "planted": [],
+  "extraction": {
+    "documentType": "invoice",
+    "documentNumber": {
+      "value": "КЛ-2209",
+      "evidence": "№ КЛ-2209",
+      "page": 1
+    },
+    "issueDate": {
+      "value": "2026-03-09",
+      "evidence": "09.03.2026",
+      "page": 1
+    },
+    "currency": {
+      "value": "UAH",
+      "evidence": "UAH",
+      "page": 1
+    },
+    "seller": {
+      "name": {
+        "value": "ТОВ «Сірий Берег»",
+        "evidence": "ТОВ «Сірий Берег»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "55012033",
+        "evidence": "55012033",
+        "page": 1
+      },
+      "ipn": {
+        "value": "3019283743",
+        "evidence": "3019283743",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA873220010000000260022222222",
+        "evidence": "UA873220010000000260022222222",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Портова, 18, м. Одеса, 65026",
+        "evidence": "вул. Портова, 18, м. Одеса, 65026",
+        "page": 1
+      }
+    },
+    "buyer": {
+      "name": {
+        "value": "ТОВ «Польова Межа»",
+        "evidence": "ТОВ «Польова Межа»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "19088019",
+        "evidence": "19088019",
+        "page": 1
+      },
+      "ipn": {
+        "value": "2765432103",
+        "evidence": "2765432103",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA963000120000000260044444444",
+        "evidence": "UA963000120000000260044444444",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Польова, 7, м. Вінниця, 21001",
+        "evidence": "вул. Польова, 7, м. Вінниця, 21001",
+        "page": 1
+      }
+    },
+    "lineItems": [
+      {
+        "description": {
+          "value": "Проєкт освітлення",
+          "evidence": "Проєкт освітлення",
+          "page": 2
+        },
+        "unit": {
+          "value": "послуга",
+          "evidence": "Од. послуга",
+          "page": 2
+        },
+        "quantity": {
+          "value": 2,
+          "evidence": "Кількість 2",
+          "page": 2
+        },
+        "unitPrice": {
+          "value": 400,
+          "evidence": "Ціна 400,00",
+          "page": 2
+        },
+        "vatRate": {
+          "value": 0.2,
+          "evidence": "ПДВ 20%",
+          "page": 2
+        },
+        "amount": {
+          "value": 800,
+          "evidence": "Сума 800,00",
+          "page": 2
+        }
+      }
+    ],
+    "subtotal": {
+      "value": 800,
+      "evidence": "Разом без ПДВ: 800,00",
+      "page": 2
+    },
+    "vatTotal": {
+      "value": 160,
+      "evidence": "ПДВ: 160,00",
+      "page": 2
+    },
+    "total": {
+      "value": 960,
+      "evidence": "Всього: 960,00",
+      "page": 2
+    },
+    "totalInWords": {
+      "value": "Дев'ятсот шістдесят гривень 00 копійок",
+      "evidence": "Дев'ятсот шістдесят гривень 00 копійок",
+      "page": 2
+    },
+    "paymentPurpose": {
+      "value": "Оплата проєкту",
+      "evidence": "Оплата проєкту",
+      "page": 2
+    }
+  }
+}

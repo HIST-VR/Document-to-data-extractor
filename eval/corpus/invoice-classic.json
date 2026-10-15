@@ -1,0 +1,169 @@
+{
+  "id": "invoice-classic",
+  "mimeType": "application/pdf",
+  "file": "invoice-classic.pdf",
+  "planted": [],
+  "extraction": {
+    "documentType": "invoice",
+    "documentNumber": {
+      "value": "КЛ-2201",
+      "evidence": "№ КЛ-2201",
+      "page": 1
+    },
+    "issueDate": {
+      "value": "2026-03-16",
+      "evidence": "16.03.2026",
+      "page": 1
+    },
+    "currency": {
+      "value": "UAH",
+      "evidence": "UAH",
+      "page": 1
+    },
+    "seller": {
+      "name": {
+        "value": "ТОВ «Кленова Тінь»",
+        "evidence": "ТОВ «Кленова Тінь»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "21543006",
+        "evidence": "21543006",
+        "page": 1
+      },
+      "ipn": {
+        "value": "2456789015",
+        "evidence": "2456789015",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA533052990000000260011111111",
+        "evidence": "UA533052990000000260011111111",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Кленова, 4, м. Львів, 79008",
+        "evidence": "вул. Кленова, 4, м. Львів, 79008",
+        "page": 1
+      }
+    },
+    "buyer": {
+      "name": {
+        "value": "ТОВ «Сірий Берег»",
+        "evidence": "ТОВ «Сірий Берег»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "55012033",
+        "evidence": "55012033",
+        "page": 1
+      },
+      "ipn": {
+        "value": "3019283743",
+        "evidence": "3019283743",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA873220010000000260022222222",
+        "evidence": "UA873220010000000260022222222",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Портова, 18, м. Одеса, 65026",
+        "evidence": "вул. Портова, 18, м. Одеса, 65026",
+        "page": 1
+      }
+    },
+    "lineItems": [
+      {
+        "description": {
+          "value": "Консультація з обліку",
+          "evidence": "Консультація з обліку",
+          "page": 1
+        },
+        "unit": {
+          "value": "год",
+          "evidence": "Од. год",
+          "page": 1
+        },
+        "quantity": {
+          "value": 2,
+          "evidence": "Кількість 2",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 100,
+          "evidence": "Ціна 100,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0.2,
+          "evidence": "ПДВ 20%",
+          "page": 1
+        },
+        "amount": {
+          "value": 200,
+          "evidence": "Сума 200,00",
+          "page": 1
+        }
+      },
+      {
+        "description": {
+          "value": "Архівна коробка",
+          "evidence": "Архівна коробка",
+          "page": 1
+        },
+        "unit": {
+          "value": "шт",
+          "evidence": "Од. шт",
+          "page": 1
+        },
+        "quantity": {
+          "value": 1,
+          "evidence": "Кількість 1",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 50,
+          "evidence": "Ціна 50,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0.2,
+          "evidence": "ПДВ 20%",
+          "page": 1
+        },
+        "amount": {
+          "value": 50,
+          "evidence": "Сума 50,00",
+          "page": 1
+        }
+      }
+    ],
+    "subtotal": {
+      "value": 250,
+      "evidence": "Разом без ПДВ: 250,00",
+      "page": 1
+    },
+    "vatTotal": {
+      "value": 50,
+      "evidence": "ПДВ: 50,00",
+      "page": 1
+    },
+    "total": {
+      "value": 300,
+      "evidence": "Всього: 300,00",
+      "page": 1
+    },
+    "totalInWords": {
+      "value": "Триста гривень 00 копійок",
+      "evidence": "Триста гривень 00 копійок",
+      "page": 1
+    },
+    "paymentPurpose": {
+      "value": "Оплата за консультацію",
+      "evidence": "Оплата за консультацію",
+      "page": 1
+    }
+  }
+}

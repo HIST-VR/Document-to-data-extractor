@@ -1,0 +1,137 @@
+{
+  "id": "act-services",
+  "mimeType": "application/pdf",
+  "file": "act-services.pdf",
+  "planted": [],
+  "extraction": {
+    "documentType": "act",
+    "documentNumber": {
+      "value": "АВ-310",
+      "evidence": "№ АВ-310",
+      "page": 1
+    },
+    "issueDate": {
+      "value": "2026-02-14",
+      "evidence": "14.02.2026",
+      "page": 1
+    },
+    "currency": {
+      "value": "UAH",
+      "evidence": "UAH",
+      "page": 1
+    },
+    "seller": {
+      "name": {
+        "value": "ТОВ «Кленова Тінь»",
+        "evidence": "ТОВ «Кленова Тінь»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "21543006",
+        "evidence": "21543006",
+        "page": 1
+      },
+      "ipn": {
+        "value": "2456789015",
+        "evidence": "2456789015",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA533052990000000260011111111",
+        "evidence": "UA533052990000000260011111111",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Кленова, 4, м. Львів, 79008",
+        "evidence": "вул. Кленова, 4, м. Львів, 79008",
+        "page": 1
+      }
+    },
+    "buyer": {
+      "name": {
+        "value": "ТОВ «Сірий Берег»",
+        "evidence": "ТОВ «Сірий Берег»",
+        "page": 1
+      },
+      "edrpou": {
+        "value": "55012033",
+        "evidence": "55012033",
+        "page": 1
+      },
+      "ipn": {
+        "value": "3019283743",
+        "evidence": "3019283743",
+        "page": 1
+      },
+      "iban": {
+        "value": "UA873220010000000260022222222",
+        "evidence": "UA873220010000000260022222222",
+        "page": 1
+      },
+      "address": {
+        "value": "вул. Портова, 18, м. Одеса, 65026",
+        "evidence": "вул. Портова, 18, м. Одеса, 65026",
+        "page": 1
+      }
+    },
+    "lineItems": [
+      {
+        "description": {
+          "value": "Монтаж полиць",
+          "evidence": "Монтаж полиць",
+          "page": 1
+        },
+        "unit": {
+          "value": "год",
+          "evidence": "Од. год",
+          "page": 1
+        },
+        "quantity": {
+          "value": 5,
+          "evidence": "Кількість 5",
+          "page": 1
+        },
+        "unitPrice": {
+          "value": 100,
+          "evidence": "Ціна 100,00",
+          "page": 1
+        },
+        "vatRate": {
+          "value": 0.2,
+          "evidence": "ПДВ 20%",
+          "page": 1
+        },
+        "amount": {
+          "value": 500,
+          "evidence": "Сума 500,00",
+          "page": 1
+        }
+      }
+    ],
+    "subtotal": {
+      "value": 500,
+      "evidence": "Разом без ПДВ: 500,00",
+      "page": 1
+    },
+    "vatTotal": {
+      "value": 100,
+      "evidence": "ПДВ: 100,00",
+      "page": 1
+    },
+    "total": {
+      "value": 600,
+      "evidence": "Всього: 600,00",
+      "page": 1
+    },
+    "totalInWords": {
+      "value": "Шістсот гривень 00 копійок",
+      "evidence": "Шістсот гривень 00 копійок",
+      "page": 1
+    },
+    "paymentPurpose": {
+      "value": "Оплата монтажу",
+      "evidence": "Оплата монтажу",
+      "page": 1
+    }
+  }
+}
