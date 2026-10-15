@@ -1,5 +1,5 @@
 import { Info } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { checksByPath } from "../../../shared/validate";
 import type { DocumentType, Extraction, FieldCheck, Party, Sourced, ValidationReport } from "../../../shared/types";
 import { StatusPill } from "../../components/StatusPill";
@@ -8,6 +8,7 @@ import { useI18n } from "../../i18n";
 import { fieldKind, type FieldKind } from "../../lib/edit";
 import type { LoadedDoc } from "../../lib/pipeline";
 import { ViewerPane } from "../viewer/ViewerPane";
+import { TraceContext, useTrace, type Provenance, type TraceEvent, type TraceTarget } from "./trace";
 import { ValueField } from "./ValueField";
 
 const PARTY_FIELDS = ["name", "edrpou", "ipn", "iban", "address"] as const;
@@ -31,8 +32,20 @@ export function ResultsView({
   const byPath = useMemo(() => checksByPath(report), [report]);
   const extraction = doc.extraction;
   const unsupported = extraction.documentType === "unknown";
+  const [hover, setHover] = useState<TraceTarget | null>(null);
+  const [focus, setFocus] = useState<TraceTarget | null>(null);
+  const current = hover ?? focus;
+  const active: Provenance | null = current?.evidence ? { evidence: current.evidence, page: current.page } : null;
+
+  function trace(event: TraceEvent, target: TraceTarget) {
+    if (event === "enter") setHover(target);
+    else if (event === "leave") setHover(null);
+    else if (event === "focus") setFocus(target);
+    else setFocus(null);
+  }
 
   return (
+    <TraceContext.Provider value={trace}>
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -51,7 +64,7 @@ export function ResultsView({
       ) : null}
       <div className="mt-8 grid grid-cols-1 gap-8 desk:grid-cols-12">
         <div className="desk:col-span-5">
-          <ViewerPane doc={doc} />
+          <ViewerPane doc={doc} active={active} />
         </div>
         <div className="desk:col-span-7">
           <section>
@@ -107,6 +120,7 @@ export function ResultsView({
         </div>
       </div>
     </div>
+    </TraceContext.Provider>
   );
 }
 
@@ -265,9 +279,14 @@ function CurrencyField({
   onCommit: (path: string, raw: string) => void;
 }) {
   const { lang, copy } = useI18n();
+  const trace = useTrace();
   const reason = check ? (lang === "uk" ? check.reason.uk : check.reason.en) : null;
+  const target = { evidence: extraction.currency.evidence, page: extraction.currency.page };
   return (
-    <div>
+    <div
+      onMouseEnter={() => trace("enter", target)}
+      onMouseLeave={() => trace("leave", target)}
+    >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <label htmlFor="field-currency" className="text-sm text-muted">
           {copy.fields.currency}
@@ -279,6 +298,8 @@ function CurrencyField({
         className="mt-1 h-11 w-full border-0 border-b border-hairline bg-transparent font-mono text-base"
         value={extraction.currency.value ?? ""}
         onChange={(event) => onCommit("currency", event.target.value)}
+        onFocus={() => trace("focus", target)}
+        onBlur={() => trace("blur", target)}
       >
         <option value="">{copy.results.emptyOption}</option>
         <option value="UAH">UAH</option>

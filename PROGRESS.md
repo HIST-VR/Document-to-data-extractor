@@ -17,11 +17,15 @@
   - Tokens, self-hosted Source Serif 4, Onest, and JetBrains Mono (latin and Cyrillic), EN/UK copy, and a light/dark toggle. First paint reads `public/theme.js` so the CSP can stay free of inline scripts.
   - Landing page has the drop zone, four fictional samples, the real pipeline steps, and the validation rules. Free-tier consent is required before a live upload. Samples fetch only `/samples/*` and do not call `/api/extract`.
   - Results show grouped editable fields, status pills, and a placeholder viewer (file name, kind, page count, sample or upload). Changing a value revalidates on the device. An unsupported type hides the fields and keeps the stored values for when the type is switched back.
-  - pdf.js and SheetJS are in separate chunks. The viewer does not render the file yet.
+  - pdf.js and SheetJS are in separate chunks.
+- Milestone D. Document viewer and evidence highlights.
+  - A PDF is drawn on a canvas with a pdf.js text layer. An image is shown as an image. A spreadsheet is shown as the converted text.
+  - Hovering or focusing a field highlights its printed phrase. Whitespace and NBSP are collapsed before the search. The highlight scrolls the matching page into view. Keyboard focus uses the same highlight as hover.
+  - If the phrase is not in that page's text layer, the viewer quotes the phrase and does not draw a box. An image has no text layer, so it always quotes the phrase.
 
 ## Next
 
-- Milestone D. Document viewer: pdf.js canvas, image preview, evidence highlight, and scroll to the printed page.
+- Milestone E. JSON, CSV, and XLSX export, clipboard copy, and on-device history of the last 10 extractions.
 
 ## Notes
 
@@ -30,3 +34,4 @@
 - Replace the placeholder KV id before deploy. Dummy Turnstile keys in `.env.example` always pass and are for local development only.
 - `npm audit` reports one high severity issue in `xlsx` (SheetJS community edition: prototype pollution and ReDoS). The spec requires SheetJS, so the package stays. Spreadsheet parsing stays inside the lazy chunk.
 - Latest checks for milestone C: typecheck, lint, 87 tests, and production build passed. In the browser, against `wrangler pages dev dist` on port 8788: landing copy, UK toggle, dark theme, invoice sample at 30/30 with no `/api/extract`, inline amount edit to 27/30, rejected non-numeric draft, unsupported type, fields kept after switching back, spreadsheet sample at 24/24, consent checkbox, and the viewer stacked above the fields at 390px. Console had no errors.
+- Latest checks for milestone D: typecheck, lint, 95 tests, and production build passed. pdf.js stays in its own chunk. In the browser, the invoice canvas highlighted `№ СД-1042`, the date substring `16.03.2026`, and `Сума 6 000,00` on the matching line. Leaving a hovered field restored the focused field's highlight. The 1C export highlighted `Номер;ЕКС-15` in the text. No `/api/extract` request. At 390px the viewer stayed above the fields. Console had no errors. The image preview was not opened in the browser: the shipped samples are a PDF and a CSV.

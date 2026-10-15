@@ -122,6 +122,9 @@ export const en = {
     image: "Image",
     pdf: "PDF",
     viewerLabel: "Document",
+    loading: "Opening the document",
+    unreadable: "This file could not be shown.",
+    notInText: "This phrase is not in the text layer.",
   },
   groups: {
     parties: "Parties",

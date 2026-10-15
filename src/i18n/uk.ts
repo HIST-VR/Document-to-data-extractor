@@ -134,6 +134,9 @@ export const uk: Copy = {
     image: "Зображення",
     pdf: "PDF",
     viewerLabel: "Документ",
+    loading: "Відкриваємо документ",
+    unreadable: "Цей файл не вдалося показати.",
+    notInText: "Цієї фрази немає в текстовому шарі.",
   },
   groups: {
     parties: "Сторони",

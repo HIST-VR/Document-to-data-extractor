@@ -1,8 +1,9 @@
 import { useState } from "react";
 import type { FieldCheck } from "../../../shared/types";
+import { StatusPill } from "../../components/StatusPill";
 import { useI18n } from "../../i18n";
 import { formatFieldValue, parseRaw, type FieldKind } from "../../lib/edit";
-import { StatusPill } from "../../components/StatusPill";
+import { useTrace } from "./trace";
 
 const CONTROL =
   "mt-1 w-full border-0 border-b border-hairline bg-transparent py-2 font-mono text-base text-ink tabular-nums";
@@ -27,6 +28,7 @@ export function ValueField({
   onCommit: (path: string, raw: string) => void;
 }) {
   const { lang, copy } = useI18n();
+  const trace = useTrace();
   const shown = formatFieldValue(kind, value);
   const [draft, setDraft] = useState(shown);
   const [seen, setSeen] = useState(shown);
@@ -64,18 +66,25 @@ export function ValueField({
     inputMode: kind === "number" || kind === "vat" ? ("decimal" as const) : undefined,
     autoCapitalize: kind === "id" ? ("characters" as const) : undefined,
     className: `${CONTROL} ${multiline ? "min-h-16" : "h-11"}`,
-    onFocus: () => setFocused(true),
+    onFocus: () => {
+      setFocused(true);
+      trace("focus", { evidence, page });
+    },
     onBlur: () => {
       setFocused(false);
       setSeen(shown);
       setDraft(shown);
       setRejected(false);
+      trace("blur", { evidence, page });
     },
     onChange: (event: { target: { value: string } }) => change(event.target.value),
   };
 
   return (
-    <div>
+    <div
+      onMouseEnter={() => trace("enter", { evidence, page })}
+      onMouseLeave={() => trace("leave", { evidence, page })}
+    >
       <div className="flex flex-wrap items-center justify-between gap-2">
         <label htmlFor={id} className="text-sm text-muted">
           {label}

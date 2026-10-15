@@ -194,6 +194,46 @@ body {
   top: 1rem;
 }
 
+.textLayer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  line-height: 1;
+  text-size-adjust: none;
+  transform-origin: 0 0;
+  --min-font-size: 1;
+  --min-font-size-inv: 1;
+  --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size));
+}
+
+.textLayer > span,
+.textLayer > br {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  transform-origin: 0 0;
+}
+
+.textLayer > span {
+  --font-height: 0;
+  --scale-x: 1;
+  --rotate: 0deg;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  transform: rotate(var(--rotate)) scaleX(var(--scale-x));
+}
+
+.textLayer span.doclens-hit {
+  position: static;
+  color: transparent;
+  background: rgb(43 68 255 / 0.28);
+  border-radius: 2px;
+}
+
+pre span.doclens-hit {
+  background: rgb(43 68 255 / 0.28);
+  color: inherit;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
