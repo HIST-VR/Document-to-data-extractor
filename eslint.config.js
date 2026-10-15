@@ -5,7 +5,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: ["dist/**", "coverage/**", "node_modules/**", "public/**"],
+    ignores: ["dist/**", "coverage/**", "node_modules/**", "public/**", ".wrangler/**"],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -22,6 +22,7 @@ export default tseslint.config(
     files: ["scripts/**/*.mjs"],
     languageOptions: {
       globals: {
+        console: "readonly",
         process: "readonly",
       },
     },
