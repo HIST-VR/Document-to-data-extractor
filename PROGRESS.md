@@ -22,10 +22,14 @@
   - A PDF is drawn on a canvas with a pdf.js text layer. An image is shown as an image. A spreadsheet is shown as the converted text.
   - Hovering or focusing a field highlights its printed phrase. Whitespace and NBSP are collapsed before the search. The highlight scrolls the matching page into view. Keyboard focus uses the same highlight as hover.
   - If the phrase is not in that page's text layer, the viewer quotes the phrase and does not draw a box. An image has no text layer, so it always quotes the phrase.
+- Milestone E. JSON, CSV, and XLSX export, clipboard copy, and on-device history.
+  - JSON is the extraction. CSV is semicolon-delimited UTF-8 with a BOM. XLSX has a Header sheet and a Lines sheet. SheetJS stays in its own chunk and loads only for the XLSX download.
+  - Cells that start with `=`, `+`, `-`, or `@` are prefixed with a quote. IndexedDB keeps the last 10 extractions (name, type, time, fields) and never the file. Clear all wipes the store. Opening a row revalidates with the current rules.
+  - The footer says this browser keeps the last 10 extractions and does not keep the file.
 
 ## Next
 
-- Milestone E. JSON, CSV, and XLSX export, clipboard copy, and on-device history of the last 10 extractions.
+- Milestone F. Eval harness of 12 synthetic documents, and the README.
 
 ## Notes
 
@@ -35,3 +39,4 @@
 - `npm audit` reports one high severity issue in `xlsx` (SheetJS community edition: prototype pollution and ReDoS). The spec requires SheetJS, so the package stays. Spreadsheet parsing stays inside the lazy chunk.
 - Latest checks for milestone C: typecheck, lint, 87 tests, and production build passed. In the browser, against `wrangler pages dev dist` on port 8788: landing copy, UK toggle, dark theme, invoice sample at 30/30 with no `/api/extract`, inline amount edit to 27/30, rejected non-numeric draft, unsupported type, fields kept after switching back, spreadsheet sample at 24/24, consent checkbox, and the viewer stacked above the fields at 390px. Console had no errors.
 - Latest checks for milestone D: typecheck, lint, 95 tests, and production build passed. pdf.js stays in its own chunk. In the browser, the invoice canvas highlighted `№ СД-1042`, the date substring `16.03.2026`, and `Сума 6 000,00` on the matching line. Leaving a hovered field restored the focused field's highlight. The 1C export highlighted `Номер;ЕКС-15` in the text. No `/api/extract` request. At 390px the viewer stayed above the fields. Console had no errors. The image preview was not opened in the browser: the shipped samples are a PDF and a CSV.
+- Latest checks for milestone E: typecheck, lint, 101 tests, and production build passed. The XLSX chunk stays separate from the main bundle. In the browser, against `wrangler pages dev dist` on port 8788: the invoice sample stayed at 30/30, JSON/CSV/XLSX downloads matched the sample (Header and Lines, number СД-1042), clipboard copy showed Скопійовано, and a history row reopened at 30/30 with no canvas and the sentence that the file is not kept. The stored record keys were id, name, documentType, createdAt, and extraction. Clear all left the store empty and disabled the button. No `/api/extract` request. Console had no errors. Live Extract was not clicked. The 390px layout and the image viewer were not rechecked in this pass.

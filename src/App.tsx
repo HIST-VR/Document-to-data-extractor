@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { safeParseExtraction } from "../shared/schemas";
 import { validateExtraction } from "../shared/validate";
 import type { ValidationReport } from "../shared/types";
 import { Footer } from "./components/Footer";
@@ -10,6 +11,7 @@ import { ProgressSteps } from "./features/upload/ProgressSteps";
 import { useI18n } from "./i18n";
 import type { Copy } from "./i18n/en";
 import { commitDocumentType, commitField } from "./lib/edit";
+import { saveExtraction, type HistoryRecord } from "./lib/history";
 import { MAX_PDF_PAGES, classifyFile, type FileKind } from "./lib/files";
 import {
   extractLive,
@@ -125,6 +127,26 @@ function Shell() {
       doc: loaded.doc,
       report: validateExtraction(loaded.doc.extraction),
     });
+    void saveExtraction({ name: loaded.doc.name, extraction: loaded.doc.extraction }).catch(() => {});
+  }
+
+  function openHistory(record: HistoryRecord) {
+    const parsed = safeParseExtraction(record.extraction);
+    if (!parsed.success) return;
+    setPhase({
+      name: "results",
+      doc: {
+        name: record.name,
+        kind: "pdf",
+        mime: "application/pdf",
+        pageCount: null,
+        source: "history",
+        extraction: parsed.data,
+        file: null,
+        text: null,
+      },
+      report: validateExtraction(parsed.data),
+    });
   }
 
   async function runExtract() {
@@ -149,6 +171,7 @@ function Shell() {
       doc: result.doc,
       report: validateExtraction(result.doc.extraction),
     });
+    void saveExtraction({ name: result.doc.name, extraction: result.doc.extraction }).catch(() => {});
   }
 
   const terms = config?.status === "ready" ? config.dataTerms : null;
@@ -179,6 +202,7 @@ function Shell() {
             }}
             onExtract={() => void runExtract()}
             onSample={(id) => void openSample(id)}
+            onOpenHistory={openHistory}
             onToken={setToken}
             onRequestConsent={() => setConsentDismissed(false)}
           />

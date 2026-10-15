@@ -2,6 +2,8 @@ import { VALIDATION_RULES } from "../../../shared/validate";
 import { Button } from "../../components/ui/Button";
 import { useI18n } from "../../i18n";
 import type { PublicConfig, SampleId } from "../../lib/pipeline";
+import { HistoryPanel } from "../history/HistoryPanel";
+import type { HistoryRecord } from "../../lib/history";
 import { DropZone } from "../upload/DropZone";
 import { SampleChips } from "../upload/SampleChips";
 import { TurnstileBox } from "../upload/TurnstileBox";
@@ -21,6 +23,7 @@ export function Home({
   onClear,
   onExtract,
   onSample,
+  onOpenHistory,
   onToken,
   onRequestConsent,
 }: {
@@ -38,6 +41,7 @@ export function Home({
   onClear: () => void;
   onExtract: () => void;
   onSample: (id: SampleId) => void;
+  onOpenHistory: (record: HistoryRecord) => void;
   onToken: (token: string | null) => void;
   onRequestConsent: () => void;
 }) {
@@ -92,6 +96,7 @@ export function Home({
         </div>
       ) : null}
       <SampleChips onSample={onSample} />
+      <HistoryPanel onOpen={onOpenHistory} />
       <section className="mt-16 border-t border-hairline pt-10" aria-labelledby="how-title">
         <h2 id="how-title" className="font-display text-3xl">
           {copy.how.title}

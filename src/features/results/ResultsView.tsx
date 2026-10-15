@@ -7,6 +7,7 @@ import { Button } from "../../components/ui/Button";
 import { useI18n } from "../../i18n";
 import { fieldKind, type FieldKind } from "../../lib/edit";
 import type { LoadedDoc } from "../../lib/pipeline";
+import { ExportBar } from "../export/ExportBar";
 import { ViewerPane } from "../viewer/ViewerPane";
 import { TraceContext, useTrace, type Provenance, type TraceEvent, type TraceTarget } from "./trace";
 import { ValueField } from "./ValueField";
@@ -56,6 +57,7 @@ export function ResultsView({
         </div>
         <Button onClick={onReset}>{copy.results.fresh}</Button>
       </div>
+      <ExportBar name={doc.name} extraction={extraction} />
       {extraction.escalated ? (
         <p className="mt-6 flex items-start gap-2 text-sm leading-6">
           <Info className="mt-1 h-4 w-4 shrink-0" aria-hidden="true" />

@@ -14,7 +14,7 @@ export interface LoadedDoc {
   kind: FileKind;
   mime: string;
   pageCount: number | null;
-  source: "sample" | "upload";
+  source: "sample" | "upload" | "history";
   extraction: ResultExtraction;
   file: Blob | null;
   text: string | null;

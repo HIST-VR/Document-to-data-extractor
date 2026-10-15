@@ -125,6 +125,24 @@ export const en = {
     loading: "Opening the document",
     unreadable: "This file could not be shown.",
     notInText: "This phrase is not in the text layer.",
+    history: "History",
+    noFile: "The file is not kept on this device. These are the stored fields.",
+  },
+  export: {
+    title: "Export",
+    json: "JSON",
+    csv: "CSV",
+    xlsx: "XLSX",
+    copy: "Copy JSON",
+    copied: "Copied",
+    failed: "The clipboard is not available in this browser.",
+  },
+  history: {
+    title: "On this device",
+    hint: "The last 10 extractions. The file is not stored.",
+    empty: "No extractions yet.",
+    clear: "Clear all",
+    unavailable: "This browser is not storing history.",
   },
   groups: {
     parties: "Parties",
@@ -176,9 +194,9 @@ export const en = {
   },
   footer: {
     storage: "DocLens stores nothing on the server and does not keep your file.",
-    browserFree: "This browser remembers only the language, the theme, and whether you accepted the upload terms.",
-    browserPaid: "This browser remembers only the language and the theme.",
-    browserUnknown: "This browser remembers only the language and the theme until configuration loads.",
+    browserFree: "This browser remembers the language, the theme, whether you accepted the upload terms, and the last 10 extractions. It does not keep the file.",
+    browserPaid: "This browser remembers the language, the theme, and the last 10 extractions. It does not keep the file.",
+    browserUnknown: "This browser remembers the language and the theme until configuration loads, and the last 10 extractions. It does not keep the file.",
     freeTerms:
       "A live upload is sent to Google's Gemini API. On the free tier, Google may use submitted content to improve its products. Do not upload confidential documents.",
     paidTerms: "A live upload is sent to Google's Gemini API under paid-tier terms.",
