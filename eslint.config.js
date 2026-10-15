@@ -19,6 +19,14 @@ export default tseslint.config(
     },
   },
   {
+    files: ["scripts/**/*.mjs"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+      },
+    },
+  },
+  {
     files: ["src/**/*.tsx"],
     plugins: {
       "react-hooks": reactHooks,
