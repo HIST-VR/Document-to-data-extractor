@@ -27,6 +27,20 @@ export async function verifyTurnstile(
   }
 }
 
+const IP_LIMIT = 6;
+const IP_WINDOW_SECONDS = 60;
+
+export async function reserveIpCall(kv: UsageKv, ip: string): Promise<boolean> {
+  const key = `ip:${ip}`;
+  const raw = await kv.get(key);
+  const current = raw == null ? 0 : Number(raw);
+  if (!Number.isFinite(current) || current >= IP_LIMIT) {
+    return false;
+  }
+  await kv.put(key, String(current + 1), { expirationTtl: IP_WINDOW_SECONDS });
+  return true;
+}
+
 export async function reserveDailyCall(kv: UsageKv, cap: number, now: Date): Promise<boolean> {
   const key = `usage:${now.toISOString().slice(0, 10)}`;
   const raw = await kv.get(key);

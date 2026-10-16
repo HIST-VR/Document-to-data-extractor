@@ -3,25 +3,19 @@ pages_build_output_dir = "./dist"
 compatibility_date = "2026-10-12"
 compatibility_flags = ["nodejs_compat"]
 
-# Replace both ids before deploy: wrangler kv namespace create DOC_LENS_USAGE
+# wrangler kv namespace create DOC_LENS_USAGE
+# wrangler kv namespace create DOC_LENS_USAGE --preview
 [[kv_namespaces]]
 binding = "USAGE_KV"
-id = "00000000000000000000000000000000"
-preview_id = "00000000000000000000000000000000"
+id = "807d0536245c4fb0b9ac82985ada6f5e"
+preview_id = "f79850fcadab4b26bf66be43fb98f55e"
 
-# 6 requests per 60 seconds per IP. Period must be 10 or 60.
-# namespace_id must be unique in the Cloudflare account.
-[[ratelimits]]
-name = "EXTRACT_LIMITER"
-namespace_id = "1001"
-
-[ratelimits.simple]
-limit = 6
-period = 60
+# Pages does not support the Workers rate-limit binding.
+# The Function counts 6 requests per 60 seconds per IP in USAGE_KV instead.
 
 [vars]
 GEMINI_MODEL = "gemini-3.5-flash-lite"
 GEMINI_DATA_TERMS = "free"
 DAILY_CAP = "100"
-# Public site key. The dummy value always passes and is for local development.
-TURNSTILE_SITE_KEY = "1x00000000000000000000AA"
+# Public site key for the DocLens UA widget. Host: doclens-ua.pages.dev.
+TURNSTILE_SITE_KEY = "0x4AAAAAAFYovw18MVPNiJnr"

@@ -11,7 +11,7 @@ interface PagesEnv {
   GEMINI_DATA_TERMS?: string;
   DAILY_CAP?: string;
   USAGE_KV: Env["USAGE_KV"];
-  EXTRACT_LIMITER: Env["EXTRACT_LIMITER"];
+  EXTRACT_LIMITER?: Env["EXTRACT_LIMITER"];
 }
 
 export const onRequestPost: PagesFunction<PagesEnv> = (context) => {

@@ -17,7 +17,7 @@ export interface Env {
   GEMINI_DATA_TERMS?: string;
   DAILY_CAP?: string;
   USAGE_KV: UsageKv;
-  EXTRACT_LIMITER: RequestLimiter;
+  EXTRACT_LIMITER?: RequestLimiter;
 }
 
 export const DEFAULT_MODEL = "gemini-3.5-flash-lite";

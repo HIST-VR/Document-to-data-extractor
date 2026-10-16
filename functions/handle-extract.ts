@@ -10,7 +10,7 @@ import {
 } from "./env";
 import { ExtractFailure, runExtraction } from "./gemini";
 import { json } from "./http";
-import { base64DecodedLength, reserveDailyCall, verifyTurnstile } from "./limits";
+import { base64DecodedLength, reserveDailyCall, reserveIpCall, verifyTurnstile } from "./limits";
 
 const MAX_BYTES = 4 * 1024 * 1024;
 const MAX_TEXT = 500_000;
@@ -105,7 +105,9 @@ export async function handleExtract(request: Request, env: Env, deps: ExtractDep
 
   const fetchImpl = deps.fetchImpl ?? fetch;
   const ip = clientIp(request);
-  const allowed = await env.EXTRACT_LIMITER.limit({ key: ip });
+  const allowed = env.EXTRACT_LIMITER
+    ? await env.EXTRACT_LIMITER.limit({ key: ip })
+    : { success: await reserveIpCall(env.USAGE_KV, ip) };
   if (!allowed.success) {
     return json({ ok: false, error: "rate_limited", message: "Too many extractions from this network. Try again in a minute." }, 429);
   }

@@ -12,7 +12,7 @@ flowchart TB
   static[SPA and bundled samples]
   api["Pages Functions /api/config and /api/extract"]
   turnstile[Turnstile siteverify]
-  limit[Per-IP rate limit, 6 per 60 seconds]
+  limit[Per-IP limit, 6 per 60 seconds, counted in KV]
   kv["KV key usage:YYYY-MM-DD"]
   gemini["Gemini generateContent"]
   idb[IndexedDB, last 10 extractions]
@@ -137,22 +137,16 @@ Motion uses `cubic-bezier(0.22, 1, 0.36, 1)`, stays under 400 ms, and turns off 
 
 ## Deploy
 
-1. Create the usage namespace and replace the placeholder id in `wrangler.toml`:
+1. The usage namespace already exists. `USAGE_KV` in `wrangler.toml` points at it. Pages does not support the Workers rate-limit binding, so the Function counts 6 requests per 60 seconds per IP in that same namespace.
+2. The Turnstile widget allows `doclens-ua.pages.dev`. Its site key is `TURNSTILE_SITE_KEY` in `wrangler.toml`. The secret is a Pages secret, not a file in this repo:
 
    ```bash
-   npx wrangler kv namespace create DOC_LENS_USAGE
+   npx wrangler pages secret put TURNSTILE_SECRET --project-name doclens-ua
+   npx wrangler pages secret put GEMINI_API_KEY --project-name doclens-ua
    ```
 
-2. Set `namespace_id` under `[[ratelimits]]` to a value that is unique in the Cloudflare account. The limit is 6 requests per 60 seconds per IP.
-3. Create a Turnstile widget. Put the site key in `TURNSTILE_SITE_KEY`. Set the secret:
-
-   ```bash
-   npx wrangler pages secret put TURNSTILE_SECRET
-   npx wrangler pages secret put GEMINI_API_KEY
-   ```
-
-4. Optional variables, already sketched in `wrangler.toml` and `.env.example`: `GEMINI_MODEL` (default `gemini-3.5-flash-lite`), `GEMINI_THINKING_LEVEL`, `GEMINI_ESCALATION_MODEL`, `GEMINI_DATA_TERMS`, `DAILY_CAP` (default 100). `DAILY_CAP` counts each outbound Gemini call, including retries. `0` closes extraction.
-5. Deploy:
+3. Optional variables, already sketched in `wrangler.toml` and `.env.example`: `GEMINI_MODEL` (default `gemini-3.5-flash-lite`), `GEMINI_THINKING_LEVEL`, `GEMINI_ESCALATION_MODEL`, `GEMINI_DATA_TERMS`, `DAILY_CAP` (default 100). `DAILY_CAP` counts each outbound Gemini call, including retries. `0` closes extraction. Leave `GEMINI_DATA_TERMS` as `free` unless the Gemini key is on a paid tier.
+4. Deploy:
 
    ```bash
    npm run deploy

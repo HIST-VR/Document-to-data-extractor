@@ -382,6 +382,21 @@ describe("handleExtract", () => {
     expect((await handleExtract(get, env(), { now })).status).toBe(405);
   });
 
+  it("counts 6 requests per address in KV when the rate-limit binding is absent", async () => {
+    const kv = memoryKv();
+    for (let index = 0; index < 6; index += 1) {
+      await kv.put("ip:203.0.113.5", String(index + 1));
+    }
+    const script = scriptedFetch([]);
+    const response = await handleExtract(post(fileBody), env({ EXTRACT_LIMITER: undefined, USAGE_KV: kv }), {
+      fetchImpl: script.fetchImpl,
+      now,
+    });
+    expect(response.status).toBe(429);
+    expect((await read(response)).error).toBe("rate_limited");
+    expect(script.gemini).toHaveLength(0);
+  });
+
   it("blocks a failed Turnstile check and a rate limit before calling Gemini", async () => {
     const turnstile = scriptedFetch([]);
     const denied = await handleExtract(post({ ...fileBody, turnstileToken: "nope" }), env(), {

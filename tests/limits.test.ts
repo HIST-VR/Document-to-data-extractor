@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { base64DecodedLength, reserveDailyCall, verifyTurnstile } from "../functions/limits";
+import { base64DecodedLength, reserveDailyCall, reserveIpCall, verifyTurnstile } from "../functions/limits";
 import type { UsageKv } from "../functions/env";
 
 function memoryKv(initial: Record<string, string> = {}): UsageKv & { store: Map<string, string> } {
@@ -30,6 +30,23 @@ describe("reserveDailyCall", () => {
   it("fails closed when the stored counter is not a number", async () => {
     const kv = memoryKv({ "usage:2026-10-16": "nope" });
     expect(await reserveDailyCall(kv, 100, now)).toBe(false);
+  });
+});
+
+describe("reserveIpCall", () => {
+  it("allows 6 calls from one address inside the window and stops on the next", async () => {
+    const kv = memoryKv();
+    for (let index = 0; index < 6; index += 1) {
+      expect(await reserveIpCall(kv, "203.0.113.5")).toBe(true);
+    }
+    expect(await reserveIpCall(kv, "203.0.113.5")).toBe(false);
+    expect(await reserveIpCall(kv, "203.0.113.9")).toBe(true);
+    expect(kv.store.get("ip:203.0.113.5")).toBe("6");
+  });
+
+  it("fails closed when the stored counter is not a number", async () => {
+    const kv = memoryKv({ "ip:203.0.113.5": "nope" });
+    expect(await reserveIpCall(kv, "203.0.113.5")).toBe(false);
   });
 });
 
