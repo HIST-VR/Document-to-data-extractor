@@ -64,15 +64,21 @@ Keyboard path, English, light, 1440×900. Tab reached the invoice sample in 8 ta
 
 Lighthouse on that home page, after the polish: performance 95, accessibility 100, best practices 96, SEO 100. The saved before repeat was 95, 94, 96, and 91. None of the four dropped. Performance had also scored 98 on an earlier before run. The spec target of 95 or higher is met on performance, accessibility, and SEO. Best practices remains 96.
 
+## Live
+
+- Production is https://doclens-ua.pages.dev. `USAGE_KV` ids and the Turnstile site key are in `wrangler.toml`. `GEMINI_API_KEY` and `TURNSTILE_SECRET` are Pages secrets.
+- Pages cannot bind the Workers rate limiter, so production counts 6 requests per 60 seconds per IP in `USAGE_KV`.
+- PDF highlights use the embedded glyph widths. The text layer's single `scaleX` was shifting mid-line phrases to the right.
+
 ## Next
 
-- The spec milestones and this polish pass are complete. A live eval needs `GEMINI_API_KEY`.
+- The spec milestones, the polish pass, and the production deploy are complete. A scored Gemini eval has not been run.
 
 ## Notes
 
 - Wrangler 4.151.0 rejects compatibility date `2026-10-16` as in the future. `wrangler.toml` uses `2026-10-12`.
 - Wrangler warns that `/* /index.html 200` looks like a loop. A request to `/documents` on the local Pages server still returned the app shell with status 200.
-- Replace the placeholder KV id before deploy. Dummy Turnstile keys in `.env.example` always pass and are for local development only.
+- Dummy Turnstile keys in `.env.example` always pass and are for local development only. Production uses the widget for `doclens-ua.pages.dev`.
 - `npm audit` reports one high severity issue in `xlsx` (SheetJS community edition: prototype pollution and ReDoS). The spec requires SheetJS, so the package stays. Spreadsheet parsing stays inside the lazy chunk.
 - Latest checks for milestone C: typecheck, lint, 87 tests, and production build passed. In the browser, against `wrangler pages dev dist` on port 8788: landing copy, UK toggle, dark theme, invoice sample at 30/30 with no `/api/extract`, inline amount edit to 27/30, rejected non-numeric draft, unsupported type, fields kept after switching back, spreadsheet sample at 24/24, consent checkbox, and the viewer stacked above the fields at 390px. Console had no errors.
 - Latest checks for milestone D: typecheck, lint, 95 tests, and production build passed. pdf.js stays in its own chunk. In the browser, the invoice canvas highlighted `№ СД-1042`, the date substring `16.03.2026`, and `Сума 6 000,00` on the matching line. Leaving a hovered field restored the focused field's highlight. The 1C export highlighted `Номер;ЕКС-15` in the text. No `/api/extract` request. At 390px the viewer stayed above the fields. Console had no errors. The image preview was not opened in the browser: the shipped samples are a PDF and a CSV.

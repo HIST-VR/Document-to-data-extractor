@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { PDFDocumentProxy } from "pdfjs-dist";
 import { clearMarks, markEvidence, matchInText } from "../../lib/evidence";
+import { highlightBoxes, showTextRuns, type HighlightBox, type PdfFontStyle, type PdfTextItem } from "../../lib/pdf-highlight";
 import { loadPdfjs } from "../../lib/pdfjs";
 import { useI18n } from "../../i18n";
 import type { Provenance } from "../results/trace";
@@ -8,6 +9,11 @@ import type { Provenance } from "../results/trace";
 interface PageText {
   page: number;
   text: string;
+}
+
+interface PageGeometry {
+  page: number;
+  boxes: (evidence: string) => HighlightBox[] | null;
 }
 
 export function PdfView({ file, active }: { file: Blob; active: Provenance | null }) {
@@ -18,6 +24,7 @@ export function PdfView({ file, active }: { file: Blob; active: Provenance | nul
   const [pages, setPages] = useState<PageText[]>([]);
   const [drawn, setDrawn] = useState(0);
   const documentRef = useRef<PDFDocumentProxy | null>(null);
+  const geometryRef = useRef<PageGeometry[]>([]);
   const [seenFile, setSeenFile] = useState(file);
   if (file !== seenFile) {
     setSeenFile(file);
@@ -84,6 +91,7 @@ export function PdfView({ file, active }: { file: Blob; active: Provenance | nul
       if (cancelled || !document) return;
       const holder = window.document.createElement("div");
       const found: PageText[] = [];
+      const geometry: PageGeometry[] = [];
       for (let number = 1; number <= document.numPages; number += 1) {
         if (cancelled) return;
         const page = await document.getPage(number);
@@ -104,7 +112,9 @@ export function PdfView({ file, active }: { file: Blob; active: Provenance | nul
         canvas.setAttribute("aria-hidden", "true");
         const textLayer = window.document.createElement("div");
         textLayer.className = "textLayer";
-        wrap.append(canvas, textLayer);
+        const highlights = window.document.createElement("div");
+        highlights.className = "doclens-highlights";
+        wrap.append(canvas, textLayer, highlights);
         holder.append(wrap);
         const renderTask = page.render({
           canvas,
@@ -113,17 +123,56 @@ export function PdfView({ file, active }: { file: Blob; active: Provenance | nul
         });
         renders.push(renderTask);
         const content = await page.getTextContent();
+        const items: PdfTextItem[] = [];
         let text = "";
         for (const item of content.items) {
-          if ("str" in item && typeof item.str === "string") text += item.str;
+          if (!("str" in item) || typeof item.str !== "string") continue;
+          text += item.str;
+          items.push({
+            str: item.str,
+            width: item.width,
+            height: item.height,
+            transform: item.transform,
+            fontName: item.fontName,
+          });
         }
         found.push({ page: number, text });
+        const styles: Record<string, PdfFontStyle> = {};
+        for (const [name, style] of Object.entries(content.styles)) {
+          styles[name] = { ascent: style.ascent, descent: style.descent };
+        }
+        const dims = page.getViewport({ scale: 1 }).rawDims as {
+          pageWidth: number;
+          pageHeight: number;
+          pageX: number;
+          pageY: number;
+        };
+        let placed: ReturnType<typeof showTextRuns> | null;
+        try {
+          const ops = await page.getOperatorList();
+          placed = showTextRuns(ops.fnArray, ops.argsArray, pdfjs.OPS.showText);
+        } catch {
+          placed = null;
+        }
+        geometry.push({
+          page: number,
+          boxes: (evidence) =>
+            placed
+              ? highlightBoxes(items, styles, placed, evidence, {
+                  width: dims.pageWidth,
+                  height: dims.pageHeight,
+                  offsetX: dims.pageX,
+                  offsetY: dims.pageY,
+                })
+              : null,
+        });
         const layer = new pdfjs.TextLayer({ textContentSource: content, container: textLayer, viewport });
         layers.push(layer);
         await Promise.all([renderTask.promise, layer.render()]);
       }
       if (cancelled) return;
       root.replaceChildren(...holder.childNodes);
+      geometryRef.current = geometry;
       setPages(found);
       setDrawn((value) => value + 1);
     }
@@ -144,8 +193,28 @@ export function PdfView({ file, active }: { file: Blob; active: Provenance | nul
     for (const layer of host.querySelectorAll(".textLayer")) {
       if (layer instanceof HTMLElement) clearMarks(layer);
     }
+    for (const overlay of host.querySelectorAll(".doclens-highlights")) overlay.replaceChildren();
     if (!active) return;
     const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    const geometry = active.page == null
+      ? geometryRef.current
+      : geometryRef.current.filter((entry) => entry.page === active.page);
+    for (const entry of geometry) {
+      const boxes = entry.boxes(active.evidence);
+      const overlay = host.querySelector(`[data-page="${entry.page}"] .doclens-highlights`);
+      if (!boxes || boxes.length === 0 || !(overlay instanceof HTMLElement)) continue;
+      for (const box of boxes) {
+        const mark = window.document.createElement("span");
+        mark.className = "doclens-hit";
+        mark.style.left = `${box.left * 100}%`;
+        mark.style.top = `${box.top * 100}%`;
+        mark.style.width = `${box.width * 100}%`;
+        mark.style.height = `${box.height * 100}%`;
+        overlay.append(mark);
+      }
+      overlay.querySelector(".doclens-hit")?.scrollIntoView({ block: "nearest", behavior });
+      return;
+    }
     const targets = active.page == null
       ? [...host.querySelectorAll(".textLayer")]
       : [host.querySelector(`[data-page="${active.page}"] .textLayer`)];

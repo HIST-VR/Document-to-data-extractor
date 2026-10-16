@@ -361,6 +361,19 @@ body {
   border-radius: 2px;
 }
 
+.doclens-highlights {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.doclens-highlights > .doclens-hit {
+  position: absolute;
+  background: rgb(43 68 255 / 0.28);
+  border-radius: 2px;
+}
+
 pre span.doclens-hit {
   background: rgb(43 68 255 / 0.28);
   color: inherit;
