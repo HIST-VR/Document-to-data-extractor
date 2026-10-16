@@ -35,13 +35,13 @@ export function HistoryPanel({ onOpen }: { onOpen: (record: HistoryRecord) => vo
     <section className="mt-16 border-t border-hairline pt-10" aria-labelledby="history-title">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h2 id="history-title" className="font-display text-3xl">{copy.history.title}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">{copy.history.hint}</p>
+          <h2 id="history-title" className="type-display">{copy.history.title}</h2>
+          <p className="mt-3 max-w-2xl type-ui text-muted">{copy.history.hint}</p>
         </div>
         <Button onClick={() => void clear()} disabled={!rows || rows.length === 0}>{copy.history.clear}</Button>
       </div>
-      {unavailable ? <p role="alert" className="mt-6 text-sm">{copy.history.unavailable}</p> : null}
-      {rows && rows.length === 0 ? <p className="mt-6 text-sm">{copy.history.empty}</p> : null}
+      {unavailable ? <p role="alert" className="mt-6 type-ui">{copy.history.unavailable}</p> : null}
+      {rows && rows.length === 0 ? <p className="mt-6 type-ui">{copy.history.empty}</p> : null}
       {rows && rows.length > 0 ? (
         <ul className="mt-6 border-t border-hairline">
           {rows.map((row) => (
@@ -51,9 +51,9 @@ export function HistoryPanel({ onOpen }: { onOpen: (record: HistoryRecord) => vo
                 className="flex min-h-11 w-full flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-hairline py-3 text-left"
                 onClick={() => onOpen(row)}
               >
-                <span className="font-mono text-sm">{row.name}</span>
-                <span className="text-sm text-muted">{copy.docType[row.documentType]}</span>
-                <time dateTime={row.createdAt} className="font-mono text-xs text-muted">{format.format(new Date(row.createdAt))}</time>
+                <span className="font-mono type-ui">{row.name}</span>
+                <span className="type-ui text-muted">{copy.docType[row.documentType]}</span>
+                <time dateTime={row.createdAt} className="font-mono type-meta text-muted">{format.format(new Date(row.createdAt))}</time>
               </button>
             </li>
           ))}

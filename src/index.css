@@ -11,9 +11,17 @@
   --color-hairline: var(--hairline);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
+  --color-on-accent: var(--on-accent);
   --color-ok: var(--ok);
   --color-warning: var(--warning);
   --color-error: var(--error);
+  --color-ok-ink: var(--ok-ink);
+  --color-warning-ink: var(--warning-ink);
+  --color-error-ink: var(--error-ink);
+  --radius-control: 12px;
+  --radius-card: 16px;
+  --radius-sheet: 20px;
+  --shadow-raised: var(--shadow);
 }
 
 @theme {
@@ -28,9 +36,15 @@
   --hairline: #e4dfd3;
   --accent: #2b44ff;
   --accent-ink: #2b44ff;
+  --on-accent: #f6f4ee;
   --ok: #1f8a4c;
   --warning: #b7791f;
   --error: #c2362b;
+  --ok-ink: #0f6b3a;
+  --warning-ink: #7a4e0c;
+  --error-ink: #9a2e24;
+  --shadow: 0 1px 1px rgb(20 18 15 / 0.04), 0 12px 32px rgb(20 18 15 / 0.06);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
   color-scheme: light;
 }
 
@@ -42,9 +56,14 @@
   --hairline: #2e2a24;
   --accent: #2b44ff;
   --accent-ink: #8a9bff;
+  --on-accent: #f6f4ee;
   --ok: #3ddb86;
   --warning: #e0a24a;
   --error: #f07167;
+  --ok-ink: #3ddb86;
+  --warning-ink: #e0a24a;
+  --error-ink: #f07167;
+  --shadow: 0 1px 1px rgb(0 0 0 / 0.24), 0 12px 32px rgb(0 0 0 / 0.32);
   color-scheme: dark;
 }
 
@@ -57,9 +76,14 @@
     --hairline: #2e2a24;
     --accent: #2b44ff;
     --accent-ink: #8a9bff;
+    --on-accent: #f6f4ee;
     --ok: #3ddb86;
     --warning: #e0a24a;
     --error: #f07167;
+    --ok-ink: #3ddb86;
+    --warning-ink: #e0a24a;
+    --error-ink: #f07167;
+    --shadow: 0 1px 1px rgb(0 0 0 / 0.24), 0 12px 32px rgb(0 0 0 / 0.32);
     color-scheme: dark;
   }
 }
@@ -177,7 +201,113 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
+}
+
+.type-meta {
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.type-ui {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.type-body {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.type-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.type-display {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.type-hero {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+
+.bar {
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.surface-card {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-card);
+  background: var(--raised);
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  transition:
+    transform 100ms var(--ease),
+    background-color 240ms var(--ease),
+    border-color 240ms var(--ease),
+    opacity 240ms var(--ease);
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.pill-ok {
+  color: var(--ok-ink);
+  background: color-mix(in srgb, var(--ok) 16%, transparent);
+}
+
+.pill-warning {
+  color: var(--warning-ink);
+  background: color-mix(in srgb, var(--warning) 18%, transparent);
+}
+
+.pill-error {
+  color: var(--error-ink);
+  background: color-mix(in srgb, var(--error) 14%, transparent);
+}
+
+.alert {
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--warning);
+  border-radius: var(--radius-card);
+  background: var(--raised);
+}
+
+.summary-bar {
+  position: sticky;
+  top: 4rem;
+  z-index: 10;
+  margin: 0 -1rem 1.5rem;
+  border-bottom: 1px solid var(--hairline);
+  padding: 1rem;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+@media (min-width: 50rem) {
+  .summary-bar {
+    position: static;
+    z-index: auto;
+    margin: 0 0 1rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+  }
 }
 
 .skip-link {
@@ -220,6 +350,8 @@ body {
   --rotate: 0deg;
   font-size: calc(var(--text-scale-factor) * var(--font-height));
   transform: rotate(var(--rotate)) scaleX(var(--scale-x));
+  background-color: transparent;
+  transition: background-color 240ms var(--ease);
 }
 
 .textLayer span.doclens-hit {
@@ -232,6 +364,7 @@ body {
 pre span.doclens-hit {
   background: rgb(43 68 255 / 0.28);
   color: inherit;
+  transition: background-color 240ms var(--ease);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -242,5 +375,9 @@ pre span.doclens-hit {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .btn:active:not(:disabled) {
+    transform: none;
   }
 }

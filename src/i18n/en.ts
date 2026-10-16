@@ -3,6 +3,7 @@ export const en = {
     skip: "Skip to content",
     home: "DocLens UA home",
     language: "Language",
+    theme: "Theme",
     themeToDark: "Dark theme",
     themeToLight: "Light theme",
   },
@@ -115,6 +116,7 @@ export const en = {
     line: "Line",
     summary: (passed: number, total: number): string =>
       `${passed}/${total} ${total === 1 ? "check" : "checks"} passed`,
+    issues: "Needs attention",
     invalidDraft: "That value was not applied.",
     emptyOption: "Not printed",
     pageCount: (count: number): string => (count === 1 ? "1 page" : `${count} pages`),

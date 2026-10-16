@@ -5,6 +5,7 @@ export const uk: Copy = {
     skip: "До вмісту",
     home: "На головну DocLens UA",
     language: "Мова",
+    theme: "Тема",
     themeToDark: "Темна тема",
     themeToLight: "Світла тема",
   },
@@ -123,6 +124,7 @@ export const uk: Copy = {
       else if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) noun = "перевірки";
       return `${passed}/${total} ${noun} пройдено`;
     },
+    issues: "Потребує уваги",
     invalidDraft: "Це значення не застосовано.",
     emptyOption: "Не надруковано",
     pageCount: (count: number): string => {

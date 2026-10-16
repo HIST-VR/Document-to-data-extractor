@@ -1,0 +1,446 @@
+{
+  "metrics": [
+    {
+      "name": "390-light-home",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "390-light-file",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "390-light-results-ok",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "390-dark-home",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "390-dark-file",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "390-dark-results-ok",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "834-light-home",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "834-light-file",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "834-light-results-ok",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "834-dark-home",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "834-dark-file",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "834-dark-results-ok",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "1440-light-home",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "1440-light-file",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "1440-light-results-ok",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "1440-dark-home",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "1440-dark-file",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    },
+    {
+      "name": "1440-dark-results-ok",
+      "overflow": false,
+      "targets": [],
+      "fonts": [
+        {
+          "spec": "400 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "500 16px Onest",
+          "loaded": true
+        },
+        {
+          "spec": "600 32px 'Source Serif 4'",
+          "loaded": true
+        },
+        {
+          "spec": "400 16px 'JetBrains Mono'",
+          "loaded": true
+        }
+      ],
+      "cyrillic": 67
+    }
+  ],
+  "skipped": [
+    "Quota recovery: Extract became available again after the 429."
+  ],
+  "attempts": "No attempts panel exists. Schema retry and escalation stay on the server.",
+  "lighthouse": {
+    "performance": 95,
+    "accessibility": 100,
+    "best-practices": 96,
+    "seo": 100
+  }
+}

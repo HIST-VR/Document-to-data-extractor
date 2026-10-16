@@ -170,8 +170,8 @@ export function PdfView({ file, active }: { file: Blob; active: Provenance | nul
     <div>
       {status === "loading" ? <div className="h-64 animate-pulse bg-hairline" aria-hidden="true" /> : null}
       <div ref={hostRef} />
-      {status === "loading" ? <p className="mt-2 text-sm text-muted">{copy.results.loading}</p> : null}
-      {status === "error" ? <p role="alert" className="text-sm">{copy.results.unreadable}</p> : null}
+      {status === "loading" ? <p className="mt-2 type-ui text-muted">{copy.results.loading}</p> : null}
+      {status === "error" ? <p role="alert" className="type-ui">{copy.results.unreadable}</p> : null}
       {missing && active ? <MissingPhrase evidence={active.evidence} /> : null}
     </div>
   );
@@ -180,9 +180,9 @@ export function PdfView({ file, active }: { file: Blob; active: Provenance | nul
 export function MissingPhrase({ evidence }: { evidence: string }) {
   const { copy } = useI18n();
   return (
-    <p className="mt-4 text-sm">
+    <p className="mt-4 type-ui">
       {copy.results.notInText}
-      <span className="mt-1 block font-mono text-xs text-muted">
+      <span className="mt-1 block font-mono type-meta text-muted">
         {copy.fields.printed}: {evidence}
       </span>
     </p>

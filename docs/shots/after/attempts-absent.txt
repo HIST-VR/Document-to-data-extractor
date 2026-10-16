@@ -1,0 +1,1 @@
+No attempts panel exists. Schema retry and escalation stay on the server.

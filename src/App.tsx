@@ -61,6 +61,7 @@ function Shell() {
   const [consentDismissed, setConsentDismissed] = useState(false);
   const [consented, setConsented] = useState(() => readConsent());
   const [token, setToken] = useState<string | null>(null);
+  const [turnstileKey, setTurnstileKey] = useState(0);
   const requestId = useRef(0);
 
   useEffect(() => {
@@ -163,6 +164,7 @@ function Shell() {
     });
     if (!result.ok) {
       setToken(null);
+      setTurnstileKey((key) => key + 1);
       setPhase({ name: "home", message: failureText(copy, result) });
       return;
     }
@@ -177,9 +179,16 @@ function Shell() {
   const terms = config?.status === "ready" ? config.dataTerms : null;
 
   return (
-    <div className="flex min-h-dvh flex-col bg-surface font-sans text-ink antialiased">
+    <div className={`flex min-h-dvh flex-col bg-surface font-sans text-ink antialiased ${phase.name === "results" ? "desk:h-dvh desk:overflow-hidden" : ""}`}>
       <Header onHome={() => resetHome()} />
-      <main id="main" className="mx-auto w-full max-w-[1280px] flex-1 px-5 py-12 sm:px-8">
+      <main
+        id="main"
+        className={
+          phase.name === "results"
+            ? "mx-auto flex w-full max-w-[1280px] flex-1 flex-col px-4 py-6 sm:px-8 desk:min-h-0 desk:overflow-hidden desk:py-4"
+            : "mx-auto w-full max-w-[1280px] flex-1 px-4 py-12 sm:px-8"
+        }
+      >
         {phase.name === "home" ? (
           <Home
             config={config}
@@ -191,6 +200,7 @@ function Shell() {
             message={phase.message}
             consented={consented}
             token={token}
+            turnstileKey={turnstileKey}
             canExtract={Boolean(pending) && !reading}
             onFile={(file) => void acceptFile(file)}
             onClear={() => {

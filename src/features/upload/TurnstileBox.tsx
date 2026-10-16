@@ -46,12 +46,20 @@ export function TurnstileBox({
         widgetId = window.turnstile.render(holder.current, {
           sitekey: siteKey,
           theme: activeTheme(),
-          callback: (token) => onTokenRef.current(token),
-          "expired-callback": () => onTokenRef.current(null),
-          "error-callback": () => onTokenRef.current(null),
+          callback: (token) => {
+            if (!cancelled) onTokenRef.current(token);
+          },
+          "expired-callback": () => {
+            if (!cancelled) onTokenRef.current(null);
+          },
+          "error-callback": () => {
+            if (!cancelled) onTokenRef.current(null);
+          },
         });
       })
-      .catch(() => onTokenRef.current(null));
+      .catch(() => {
+        if (!cancelled) onTokenRef.current(null);
+      });
 
     return () => {
       cancelled = true;

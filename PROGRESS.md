@@ -31,9 +31,42 @@
   - The shared validator caught that planted defect: 1 of 1. That number is not a model score.
   - No `GEMINI_API_KEY` was available, so the live Gemini run was not done and the report has no field-accuracy number. With a key, the runner calls Gemini one document at a time, waits 5 seconds between documents, and on HTTP 429 waits 20 seconds and then 40 seconds.
 
+## Polish pass
+
+Reviewed in `AUDIT.md`, then applied. Validators, exports, history, and the Gemini request were not changed. The live eval was not run again.
+
+- The viewer prints a page count only when it has one. An image or a spreadsheet is no longer labeled as a spreadsheet twice.
+- On a wide screen the check summary stays put. The document and the fields scroll on their own. Below that width the summary sticks under the header.
+- Warnings and errors are listed once under the summary. Activating a row focuses that field and highlights the printed phrase the viewer already knows how to find.
+- A failed extract remounts Turnstile. Removing the old widget cannot clear the new token. After a mocked 429, Extract became available again.
+- The file input is out of the tab order and hidden from assistive tech. The labeled button remains the control. The wordmark's accessible name contains the visible "DocLens UA". The language toggle sets `document.documentElement.lang`. `public/robots.txt` allows crawling, and the SPA redirect stays.
+- Status text uses darker ink on the light paper so small labels clear WCAG AA. The spec swatches stay the tints. The consent checkbox hit area is 44 px. The drawn box stays 20 px.
+- Type, radius, shadow, and motion now come from tokens in `src/index.css`. Source Serif 4 is only the landing heading. Onest is the UI face. JetBrains Mono stays on values.
+
+Left on purpose: the warning label "Check", the label "Spam check", the history heading "On this device", `font-display: optional`, the sample Validate step often being batched away, and one request for the upload and the model. There is still no attempts panel. Best practices stayed at 96. That score is one devtools issue with no URL on `wrangler pages dev`, and the CSP was not weakened.
+
+## Visual QA
+
+Checked against the production build on `wrangler pages dev dist`. Screenshots and measurements are in `docs/shots/after/`.
+
+| Check | Result |
+| --- | --- |
+| No horizontal scroll at 390 px | Pass. All 18 measured pages in `metrics.json` report `overflow: false`, including every 390 px page. |
+| Tap targets at least 44 px | Pass on those pages (`targets` is empty). The open consent checkbox measured 44×44. Its drawn mark stays 20 px. The file input is 1×1, `aria-hidden`, and not in the tab order. |
+| Focus visible | Pass. Keyboard focus showed a 2 px solid accent outline on the skip link, the sample, New document, Choose a file, the consent checkbox, and Continue. |
+| Contrast AA in both themes | Pass for the home Lighthouse color-contrast audit (score 1, no failing items) and for the token pairs in `AUDIT.md`. |
+| Cyrillic in all three fonts | Pass. Onest, Source Serif 4, and JetBrains Mono each loaded. A `ЄДРПОУ` probe measured 67 px wide. |
+| No layout shift on load | Pass on the home Lighthouse run. Cumulative layout shift scored 1, displayed as 0. The results screen did not get its own Lighthouse run. |
+| No console errors | Pass on the home `errors-in-console` audit (score 1, no items) and during the keyboard tour below (no console errors, no page errors). |
+| Keyboard-only run-through | Pass for the path below. Extract was not activated, so Gemini was not called. |
+
+Keyboard path, English, light, 1440×900. Tab reached the invoice sample in 8 tabs. Enter opened it. Tab reached the first line amount. Typing `100` and leaving the field changed the heading to 27/30. Shift+Tab reached New document. Enter returned home. Tab reached the history row. Enter reopened the stored extraction at 30/30, so the edit had not been written back. Tab reached New document and Enter returned to the landing heading. Tab reached Choose a file. Setting `public/samples/invoice.pdf` opened the consent dialog with focus on the checkbox, whose name is the consent sentence. Space checked it. Tab reached Continue, which was enabled. Enter accepted. Extract was on screen, 44 px tall, and disabled until a Turnstile token arrives.
+
+Lighthouse on that home page, after the polish: performance 95, accessibility 100, best practices 96, SEO 100. The saved before repeat was 95, 94, 96, and 91. None of the four dropped. Performance had also scored 98 on an earlier before run. The spec target of 95 or higher is met on performance, accessibility, and SEO. Best practices remains 96.
+
 ## Next
 
-- The spec milestones are complete. A live eval needs `GEMINI_API_KEY`.
+- The spec milestones and this polish pass are complete. A live eval needs `GEMINI_API_KEY`.
 
 ## Notes
 
@@ -45,3 +78,4 @@
 - Latest checks for milestone D: typecheck, lint, 95 tests, and production build passed. pdf.js stays in its own chunk. In the browser, the invoice canvas highlighted `№ СД-1042`, the date substring `16.03.2026`, and `Сума 6 000,00` on the matching line. Leaving a hovered field restored the focused field's highlight. The 1C export highlighted `Номер;ЕКС-15` in the text. No `/api/extract` request. At 390px the viewer stayed above the fields. Console had no errors. The image preview was not opened in the browser: the shipped samples are a PDF and a CSV.
 - Latest checks for milestone E: typecheck, lint, 101 tests, and production build passed. The XLSX chunk stays separate from the main bundle. In the browser, against `wrangler pages dev dist` on port 8788: the invoice sample stayed at 30/30, JSON/CSV/XLSX downloads matched the sample (Header and Lines, number СД-1042), clipboard copy showed Скопійовано, and a history row reopened at 30/30 with no canvas and the sentence that the file is not kept. The stored record keys were id, name, documentType, createdAt, and extraction. Clear all left the store empty and disabled the button. No `/api/extract` request. Console had no errors. Live Extract was not clicked. The 390px layout and the image viewer were not rechecked in this pass.
 - Latest checks for milestone F: typecheck, lint, 108 tests, and production build passed. pdf.js and SheetJS stay in separate chunks. `npm run eval` rendered the corpus and wrote `eval/report.md`. Google's Gemini 3.5 Flash-Lite notes confirm the model id and `thinking_level`, and say `temperature` is deprecated. `responseJsonSchema` was not named on that page. Screenshots in the README are from the local production build.
+- Latest checks for the polish pass: typecheck, lint, and 108 tests passed again. Coverage on the gated files was unchanged (98.87% statements, 96.09% branches, 100% functions, 98.82% lines). `npm run shots` wrote `docs/shots/before/` and `docs/shots/after/`. The keyboard tour above ran against the production build. No test asserted the viewer page-count line, the warning label, or the Turnstile retry, so the suite was not edited.

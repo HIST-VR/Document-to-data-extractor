@@ -56,26 +56,26 @@ export function DropZone({
         setOver(false);
         take(event.dataTransfer.files[0]);
       }}
-      className={`border border-dashed bg-raised px-6 py-10 transition-colors duration-200 ${over ? "border-accent" : "border-hairline"}`}
+      className={`surface-card px-6 py-8 ${over ? "border-accent" : ""}`}
     >
-      <h2 className="font-display text-3xl">{copy.drop.title}</h2>
-      <p id="drop-hint" className="mt-3 max-w-xl text-sm leading-6 text-muted">
+      <h2 className="type-display">{copy.drop.title}</h2>
+      <p id="drop-hint" className="mt-3 max-w-xl type-ui text-muted">
         {copy.drop.hint}
       </p>
       {fileName ? (
-        <p className="mt-6 font-mono text-sm">
+        <p className="mt-6 font-mono type-ui">
           {fileName}
           {fileSize != null ? <span className="text-muted"> · {formatBytes(fileSize)}</span> : null}
         </p>
       ) : null}
       {reading ? (
         <div className="mt-4" aria-live="polite">
-          <span className="block h-3 w-40 bg-hairline" />
-          <p className="mt-2 text-sm">{copy.drop.reading}</p>
+          <span className="block h-5 w-48 rounded-control bg-hairline" />
+          <p className="mt-2 type-ui">{copy.drop.reading}</p>
         </div>
       ) : null}
       {fileError ? (
-        <p role="alert" className="mt-4 text-sm">
+        <p role="alert" className="mt-4 type-ui">
           {fileError}
         </p>
       ) : null}
@@ -89,6 +89,8 @@ export function DropZone({
         ref={input}
         className="sr-only"
         type="file"
+        tabIndex={-1}
+        aria-hidden="true"
         accept=".pdf,.jpg,.jpeg,.png,.csv,.xlsx"
         onChange={(event) => take(event.target.files?.[0])}
       />

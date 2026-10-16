@@ -20,7 +20,7 @@ export function TextView({ text, active }: { text: string; active: Provenance | 
 
   return (
     <div>
-      <pre ref={ref} className="whitespace-pre-wrap font-mono text-sm leading-6 text-ink" />
+      <pre ref={ref} className="whitespace-pre-wrap font-mono type-ui text-ink" />
       {missing && active ? <MissingPhrase evidence={active.evidence} /> : null}
     </div>
   );

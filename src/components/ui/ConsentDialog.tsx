@@ -22,7 +22,7 @@ export function ConsentDialog({
     >
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-40 bg-ink/30" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(36rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 border border-hairline bg-raised p-6">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(36rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 rounded-sheet border border-hairline bg-raised p-6 shadow-raised">
           {open ? <ConsentForm onAccept={onAccept} onCancel={onCancel} /> : null}
         </Dialog.Content>
       </Dialog.Portal>
@@ -36,13 +36,13 @@ function ConsentForm({ onAccept, onCancel }: { onAccept: () => void; onCancel: (
 
   return (
     <>
-      <Dialog.Title className="font-display text-3xl text-ink">{copy.consent.title}</Dialog.Title>
-      <Dialog.Description className="mt-3 text-sm leading-6 text-muted">{copy.consent.lead}</Dialog.Description>
+      <Dialog.Title className="type-display text-ink">{copy.consent.title}</Dialog.Title>
+      <Dialog.Description className="mt-3 type-ui text-muted">{copy.consent.lead}</Dialog.Description>
       <div className="mt-6 flex items-start gap-3">
         <span className="pt-0.5">
           <Checkbox id="upload-consent" checked={checked} onCheckedChange={setChecked} labelledBy="upload-consent-label" />
         </span>
-        <label id="upload-consent-label" htmlFor="upload-consent" className="min-h-11 cursor-pointer text-sm leading-6">
+        <label id="upload-consent-label" htmlFor="upload-consent" className="min-h-11 cursor-pointer type-ui">
           {copy.consent.sentence}
         </label>
       </div>

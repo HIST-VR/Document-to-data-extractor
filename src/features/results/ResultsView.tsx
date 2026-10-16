@@ -10,7 +10,7 @@ import type { LoadedDoc } from "../../lib/pipeline";
 import { ExportBar } from "../export/ExportBar";
 import { ViewerPane } from "../viewer/ViewerPane";
 import { TraceContext, useTrace, type Provenance, type TraceEvent, type TraceTarget } from "./trace";
-import { ValueField } from "./ValueField";
+import { FieldNote, ValueField } from "./ValueField";
 
 const PARTY_FIELDS = ["name", "edrpou", "ipn", "iban", "address"] as const;
 const LINE_FIELDS = ["description", "unit", "quantity", "unitPrice", "vatRate", "amount"] as const;
@@ -29,7 +29,7 @@ export function ResultsView({
   onType: (value: string) => void;
   onReset: () => void;
 }) {
-  const { copy } = useI18n();
+  const { lang, copy } = useI18n();
   const byPath = useMemo(() => checksByPath(report), [report]);
   const extraction = doc.extraction;
   const unsupported = extraction.documentType === "unknown";
@@ -45,39 +45,73 @@ export function ResultsView({
     else setFocus(null);
   }
 
+  const issues = report.checks.filter((check) => check.status !== "ok");
+
+  function jump(path: string, evidence: string | null, page: number | null) {
+    const id = path === "documentType" ? "field-document-type" : `field-${path.replace(/[^A-Za-z0-9]+/g, "-")}`;
+    const node = document.getElementById(id);
+    if (!node) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    node.focus({ preventScroll: true });
+    node.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+    trace("focus", { evidence, page });
+  }
+
   return (
     <TraceContext.Provider value={trace}>
-    <div>
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-xs text-muted">{copy.docType[extraction.documentType]}</p>
-          <h1 className="mt-2 max-w-3xl font-display text-4xl leading-tight">
-            {unsupported ? copy.results.unsupportedTitle : copy.results.summary(report.passed, report.total)}
-          </h1>
+    <div className="flex flex-col desk:min-h-0 desk:flex-1 desk:overflow-hidden">
+      <div className="summary-bar">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="font-mono type-meta text-muted">{copy.docType[extraction.documentType]}</p>
+            <h1 className="mt-1 max-w-3xl type-display" aria-live="polite">
+              {unsupported ? copy.results.unsupportedTitle : copy.results.summary(report.passed, report.total)}
+            </h1>
+          </div>
+          <Button onClick={onReset}>{copy.results.fresh}</Button>
         </div>
-        <Button onClick={onReset}>{copy.results.fresh}</Button>
+        {issues.length > 0 ? (
+          <ul aria-label={copy.results.issues} className="mt-4 flex max-h-48 flex-col gap-1 overflow-auto">
+            {issues.map((check) => (
+              <li key={check.path}>
+                <button
+                  type="button"
+                  className="btn flex min-h-11 w-full items-center gap-3 rounded-control px-3 text-left hover:bg-raised"
+                  onClick={() => {
+                    const sourced = readSourced(extraction, check.path);
+                    jump(check.path, sourced?.evidence ?? null, sourced?.page ?? null);
+                  }}
+                >
+                  <StatusPill status={check.status} label={copy.status[check.status]} />
+                  <span className="type-ui">{issueLabel(check.path, copy, extraction)}</span>
+                  <span className="min-w-0 truncate type-ui text-muted">{lang === "uk" ? check.reason.uk : check.reason.en}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        <ExportBar name={doc.name} extraction={extraction} />
+        {extraction.escalated ? (
+          <p className="mt-4 flex items-start gap-2 type-ui">
+            <Info className="mt-1 h-4 w-4 shrink-0" aria-hidden="true" />
+            {copy.results.escalated}
+          </p>
+        ) : null}
       </div>
-      <ExportBar name={doc.name} extraction={extraction} />
-      {extraction.escalated ? (
-        <p className="mt-6 flex items-start gap-2 text-sm leading-6">
-          <Info className="mt-1 h-4 w-4 shrink-0" aria-hidden="true" />
-          {copy.results.escalated}
-        </p>
-      ) : null}
-      <div className="mt-8 grid grid-cols-1 gap-8 desk:grid-cols-12">
-        <div className="desk:col-span-5">
+      <div className="grid grid-cols-1 gap-6 desk:min-h-0 desk:flex-1 desk:grid-cols-12 desk:overflow-hidden">
+        <div className="desk:col-span-5 desk:min-h-0 desk:overflow-y-auto desk:pr-2">
           <ViewerPane doc={doc} active={active} />
         </div>
-        <div className="desk:col-span-7">
+        <div className="desk:col-span-7 desk:min-h-0 desk:overflow-y-auto desk:pl-2">
           <section>
-            <h2 className="font-display text-2xl">{copy.groups.document}</h2>
+            <h2 className="type-title">{copy.groups.document}</h2>
             <div className="mt-4">
-              <label htmlFor="field-document-type" className="text-sm text-muted">
+              <label htmlFor="field-document-type" className="type-ui text-muted">
                 {copy.fields.documentType}
               </label>
               <select
                 id="field-document-type"
-                className="mt-1 h-11 w-full border-0 border-b border-hairline bg-transparent font-mono text-base"
+                className="mt-1 h-11 w-full border-0 border-b border-hairline bg-transparent font-mono type-body tabular-nums"
                 value={extraction.documentType}
                 onChange={(event) => onType(event.target.value)}
               >
@@ -89,7 +123,7 @@ export function ResultsView({
               </select>
             </div>
             {unsupported ? (
-              <p className="mt-6 max-w-xl text-base leading-7">{copy.results.unsupportedBody}</p>
+              <p className="mt-6 max-w-xl type-body">{copy.results.unsupportedBody}</p>
             ) : (
               <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <BoundField path="documentNumber" extraction={extraction} check={byPath.get("documentNumber")} onCommit={onCommit} />
@@ -103,7 +137,7 @@ export function ResultsView({
               <PartySection extraction={extraction} byPath={byPath} onCommit={onCommit} />
               <LineSection extraction={extraction} byPath={byPath} onCommit={onCommit} />
               <section className="mt-10">
-                <h2 className="font-display text-2xl">{copy.groups.totals}</h2>
+                <h2 className="type-title">{copy.groups.totals}</h2>
                 <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
                   <BoundField path="subtotal" extraction={extraction} check={byPath.get("subtotal")} onCommit={onCommit} />
                   <BoundField path="vatTotal" extraction={extraction} check={byPath.get("vatTotal")} onCommit={onCommit} />
@@ -112,7 +146,7 @@ export function ResultsView({
                 </div>
               </section>
               <section className="mt-10">
-                <h2 className="font-display text-2xl">{copy.groups.payment}</h2>
+                <h2 className="type-title">{copy.groups.payment}</h2>
                 <div className="mt-4">
                   <BoundField path="paymentPurpose" extraction={extraction} check={byPath.get("paymentPurpose")} onCommit={onCommit} />
                 </div>
@@ -139,7 +173,7 @@ function PartySection({
   const roles = copy.roles[extraction.documentType];
   return (
     <section className="mt-10">
-      <h2 className="font-display text-2xl">{copy.groups.parties}</h2>
+      <h2 className="type-title">{copy.groups.parties}</h2>
       <div className="mt-4 grid grid-cols-1 gap-8 lg:grid-cols-2">
         <PartyColumn title={roles.seller} prefix="seller" extraction={extraction} byPath={byPath} onCommit={onCommit} />
         <PartyColumn title={roles.buyer} prefix="buyer" extraction={extraction} byPath={byPath} onCommit={onCommit} />
@@ -163,7 +197,7 @@ function PartyColumn({
 }) {
   return (
     <div>
-      <h3 className="font-display text-xl">{title}</h3>
+      <h3 className="type-title">{title}</h3>
       <div className="mt-4 flex flex-col gap-5">
         {PARTY_FIELDS.map((field) => (
           <BoundField
@@ -191,12 +225,12 @@ function LineSection({
   const { copy } = useI18n();
   return (
     <section className="mt-10">
-      <h2 className="font-display text-2xl">{copy.groups.lines}</h2>
-      {extraction.lineItems.length === 0 ? <p className="mt-4">{copy.results.noLines}</p> : null}
+      <h2 className="type-title">{copy.groups.lines}</h2>
+      {extraction.lineItems.length === 0 ? <p className="mt-4 type-ui">{copy.results.noLines}</p> : null}
       <div className="mt-4 flex flex-col gap-6">
         {extraction.lineItems.map((_line, index) => (
-          <article key={index} className="border border-hairline bg-raised p-4">
-            <h3 className="font-mono text-xs text-muted">
+          <article key={index} className="rounded-card border border-hairline bg-raised p-4">
+            <h3 className="font-mono type-meta text-muted">
               {copy.results.line} {index + 1}
             </h3>
             <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -221,6 +255,19 @@ function fieldLabel(path: string, copy: ReturnType<typeof useI18n>["copy"]): str
   const field = path.split(".").pop() ?? path;
   if (field in copy.fields) return copy.fields[field as keyof typeof copy.fields];
   return field;
+}
+
+function issueLabel(path: string, copy: ReturnType<typeof useI18n>["copy"], extraction: Extraction): string {
+  const line = /^lineItems\[(\d+)\]\.(.+)$/.exec(path);
+  if (line?.[1] && line[2]) {
+    return `${copy.results.line} ${Number(line[1]) + 1} · ${fieldLabel(line[2], copy)}`;
+  }
+  const party = /^(seller|buyer)\.(.+)$/.exec(path);
+  if (party?.[1] && party[2]) {
+    const role = copy.roles[extraction.documentType][party[1] as "seller" | "buyer"];
+    return `${role} · ${fieldLabel(party[2], copy)}`;
+  }
+  return fieldLabel(path, copy);
 }
 
 function readSourced(extraction: Extraction, path: string): Sourced<string | number> | null {
@@ -290,14 +337,14 @@ function CurrencyField({
       onMouseLeave={() => trace("leave", target)}
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <label htmlFor="field-currency" className="text-sm text-muted">
+        <label htmlFor="field-currency" className="type-ui text-muted">
           {copy.fields.currency}
         </label>
         {check ? <StatusPill status={check.status} label={copy.status[check.status]} /> : null}
       </div>
       <select
         id="field-currency"
-        className="mt-1 h-11 w-full border-0 border-b border-hairline bg-transparent font-mono text-base"
+        className="mt-1 h-11 w-full border-0 border-b border-hairline bg-transparent font-mono type-body tabular-nums"
         value={extraction.currency.value ?? ""}
         onChange={(event) => onCommit("currency", event.target.value)}
         onFocus={() => trace("focus", target)}
@@ -308,12 +355,12 @@ function CurrencyField({
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
       </select>
-      {reason ? <p className="mt-2 text-sm">{reason}</p> : null}
-      {extraction.currency.evidence ? (
-        <p className="mt-1 font-mono text-xs text-muted">
-          {copy.fields.printed}: {extraction.currency.evidence}
-        </p>
-      ) : null}
+      <FieldNote
+        status={check?.status}
+        reason={reason}
+        evidence={extraction.currency.evidence}
+        page={extraction.currency.page}
+      />
     </div>
   );
 }

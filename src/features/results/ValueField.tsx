@@ -1,12 +1,12 @@
 import { useState } from "react";
-import type { FieldCheck } from "../../../shared/types";
+import type { FieldCheck, FieldStatus } from "../../../shared/types";
 import { StatusPill } from "../../components/StatusPill";
 import { useI18n } from "../../i18n";
 import { formatFieldValue, parseRaw, type FieldKind } from "../../lib/edit";
 import { useTrace } from "./trace";
 
 const CONTROL =
-  "mt-1 w-full border-0 border-b border-hairline bg-transparent py-2 font-mono text-base text-ink tabular-nums";
+  "mt-1 w-full border-0 border-b border-hairline bg-transparent py-2 font-mono type-body text-ink tabular-nums";
 
 export function ValueField({
   label,
@@ -86,20 +86,63 @@ export function ValueField({
       onMouseLeave={() => trace("leave", { evidence, page })}
     >
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <label htmlFor={id} className="text-sm text-muted">
+        <label htmlFor={id} className="type-ui text-muted">
           {label}
         </label>
         {check ? <StatusPill status={check.status} label={copy.status[check.status]} /> : null}
       </div>
       {multiline ? <textarea {...shared} rows={2} /> : <input {...shared} />}
       {rejected ? (
-        <p role="alert" className="mt-2 text-sm">
+        <p role="alert" className="mt-2 type-ui">
           {copy.results.invalidDraft}
         </p>
       ) : null}
-      {reason ? <p className="mt-2 text-sm">{reason}</p> : null}
+      <FieldNote status={check?.status} reason={reason} evidence={evidence} page={page} />
+    </div>
+  );
+}
+
+export function FieldNote({
+  status,
+  reason,
+  evidence,
+  page,
+}: {
+  status: FieldStatus | undefined;
+  reason: string | null;
+  evidence: string | null;
+  page: number | null;
+}) {
+  const { copy } = useI18n();
+  if (!reason && !evidence) return null;
+  const printed = evidence ? (
+    <>
+      {reason ? " · " : null}
+      {copy.fields.printed}: {evidence}
+      {page != null ? (
+        <>
+          {" · "}
+          <span className="sr-only">{copy.fields.page} </span>
+          {page}
+        </>
+      ) : null}
+    </>
+  ) : null;
+
+  if (status === "ok") {
+    return (
+      <p className="mt-1 type-meta text-muted">
+        {reason}
+        {printed}
+      </p>
+    );
+  }
+
+  return (
+    <>
+      {reason ? <p className="mt-2 type-ui">{reason}</p> : null}
       {evidence ? (
-        <p className="mt-1 font-mono text-xs text-muted">
+        <p className="mt-1 font-mono type-meta text-muted">
           {copy.fields.printed}: {evidence}
           {page != null ? (
             <>
@@ -110,6 +153,6 @@ export function ValueField({
           ) : null}
         </p>
       ) : null}
-    </div>
+    </>
   );
 }

@@ -38,7 +38,7 @@ export function ExportBar({ name, extraction }: { name: string; extraction: Resu
 
   return (
     <div className="mt-6">
-      <h2 className="font-mono text-xs text-muted">{copy.export.title}</h2>
+      <h2 className="font-mono type-meta text-muted">{copy.export.title}</h2>
       <div className="mt-3 flex flex-wrap gap-3">
         <Button onClick={() => saveFile(downloadName(name, "json"), new Blob([extractionJson(extraction)], { type: "application/json" }))}>
           {copy.export.json}
@@ -62,7 +62,7 @@ export function ExportBar({ name, extraction }: { name: string; extraction: Resu
         <Button onClick={() => void copyJson()}>{copied ? copy.export.copied : copy.export.copy}</Button>
       </div>
       {failed ? (
-        <p role="alert" className="mt-3 text-sm">{copy.export.failed}</p>
+        <p role="alert" className="mt-3 type-ui">{copy.export.failed}</p>
       ) : null}
     </div>
   );
