@@ -23,7 +23,11 @@ export default tseslint.config(
     languageOptions: {
       globals: {
         console: "readonly",
+        document: "readonly",
         fetch: "readonly",
+        getComputedStyle: "readonly",
+        indexedDB: "readonly",
+        localStorage: "readonly",
         process: "readonly",
         setTimeout: "readonly",
         URL: "readonly",
